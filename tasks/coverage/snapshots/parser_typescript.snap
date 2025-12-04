@@ -2373,7 +2373,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
    ╰────
   help: No modifiers are allowed here.
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/compiler/ClassDeclaration10.ts:2:4]
  1 │ class C {
  2 │    constructor();
@@ -2389,7 +2389,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
  4 │ }
    ╰────
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/compiler/ClassDeclaration11.ts:2:4]
  1 │ class C {
  2 │    constructor();
@@ -2413,7 +2413,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
  3 │    constructor();
    ╰────
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/compiler/ClassDeclaration14.ts:3:4]
  2 │    foo();
  3 │    constructor();
@@ -2486,7 +2486,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
  3 │ 
    ╰────
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/compiler/ClassDeclaration8.ts:2:3]
  1 │ class C {
  2 │   constructor();
@@ -20918,7 +20918,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
  2 │ }
    ╰────
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/conformance/parser/ecmascript5/ClassDeclarations/parserClassDeclaration10.ts:2:4]
  1 │ class C {
  2 │    constructor();
@@ -20934,7 +20934,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
  4 │ }
    ╰────
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/conformance/parser/ecmascript5/ClassDeclarations/parserClassDeclaration11.ts:2:4]
  1 │ class C {
  2 │    constructor();
@@ -20958,7 +20958,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
  3 │    constructor();
    ╰────
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/conformance/parser/ecmascript5/ClassDeclarations/parserClassDeclaration14.ts:3:4]
  2 │    foo();
  3 │    constructor();
@@ -21046,7 +21046,7 @@ Expect to Parse: tasks/coverage/typescript/tests/cases/conformance/parser/ecmasc
    ╰────
   help: Merge the two 'implements' clauses into one by a ','
 
-  × Constructor implementation is missing.
+  × TS(2390): Constructor implementation is missing.
    ╭─[typescript/tests/cases/conformance/parser/ecmascript5/ClassDeclarations/parserClassDeclaration8.ts:2:3]
  1 │ class C {
  2 │   constructor();
