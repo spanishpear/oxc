@@ -27,6 +27,7 @@ import type { RequireAtLeastOne } from "type-fest";
 import type { Plugin, Rule } from "../plugins/load.ts";
 import type { Options } from "../plugins/options.ts";
 import type { DiagnosticData, Suggestion } from "../plugins/report.ts";
+import type { ParserOptions as ParseOptions } from "./parse.ts";
 
 const { hasOwn } = Object,
   { isArray } = Array;
@@ -117,8 +118,62 @@ interface Config {
    * If `true`, column offsets in diagnostics are incremented by 1, to match ESLint's behavior.
    */
   eslintCompat?: boolean;
+  languageOptions?: LanguageOptions;
   [key: string]: unknown;
 }
+
+/**
+ * Language options config.
+ */
+interface LanguageOptions {
+  ecmaVersion?: number | "latest";
+  sourceType?: SourceType;
+  globals?: Record<
+    string,
+    boolean | "true" | "writable" | "writeable" | "false" | "readonly" | "readable" | "off" | null
+  >;
+  parser?: {
+    parse?: (code: string, options?: Record<string, unknown>) => unknown;
+    parseForESLint?: (code: string, options?: Record<string, unknown>) => unknown;
+  };
+  parserOptions?: ParserOptions;
+}
+
+// TODO: Add tests for `sourceType`, `lang`, and `ecmaFeatures.jsx` options
+
+/**
+ * Source type.
+ *
+ * - `'unambiguous'` is not supported in ESLint compatibility mode.
+ * - `'commonjs'` is only supported in ESLint compatibility mode.
+ */
+type SourceType = "script" | "module" | "unambiguous" | "commonjs";
+
+/**
+ * Parser options config.
+ */
+interface ParserOptions {
+  ecmaFeatures?: EcmaFeatures;
+  /**
+   * Language variant to parse file as.
+   */
+  lang?: Language;
+}
+
+/**
+ * ECMA features config.
+ */
+interface EcmaFeatures {
+  /**
+   * `true` to enable JSX parsing.
+   */
+  jsx?: boolean;
+}
+
+/**
+ * Parser language.
+ */
+type Language = "js" | "jsx" | "ts" | "tsx" | "dts";
 
 // Default shared config
 const DEFAULT_SHARED_CONFIG: Config = {
@@ -149,6 +204,7 @@ interface TestCase {
    * See `Config` type.
    */
   eslintCompat?: boolean;
+  languageOptions?: LanguageOptions;
 }
 
 /**
@@ -208,8 +264,8 @@ interface Diagnostic {
   suggestions: Suggestion[] | null;
 }
 
-// Default path for test cases if not provided
-const DEFAULT_PATH = "file.js";
+// Default filename base for test cases if not provided
+const DEFAULT_FILENAME_BASE = "file";
 
 // ------------------------------------------------------------------------------
 // `RuleTester` class
@@ -690,6 +746,14 @@ function createConfigForTest(test: TestCase, config: Config): Config {
     clone();
     config.eslintCompat = test.eslintCompat;
   }
+  // TODO: Merge rather override
+  if (hasOwn(test, "languageOptions")) {
+    const { languageOptions } = test;
+    if (languageOptions != null) {
+      clone();
+      config.languageOptions = test.languageOptions;
+    }
+  }
   return config;
 }
 
@@ -701,8 +765,55 @@ function createConfigForTest(test: TestCase, config: Config): Config {
  * @returns Array of diagnostics
  */
 function lint(test: TestCase, plugin: Plugin, config: Config): Diagnostic[] {
-  // TODO: Use config to set language options
-  const _ = config;
+  // Get options for parsing from config
+  let parseOptions: ParseOptions = {},
+    ext = "js";
+
+  const { languageOptions } = config;
+  if (languageOptions != null) {
+    let { sourceType } = languageOptions;
+    if (sourceType != null) {
+      if (config.eslintCompat === true) {
+        // ESLint compatibility mode.
+        // `unambiguous` is disallowed. Treat `commonjs` as `script`.
+        if (sourceType === "commonjs") {
+          sourceType = "script";
+        } else if (sourceType === "unambiguous") {
+          throw new Error(
+            "'unambiguous' source type is not supported in ESLint compatibility mode.\n" +
+              "Disable ESLint compatibility mode by setting `eslintCompat` to `false` in the config / test case.",
+          );
+        }
+      } else {
+        // Not ESLint compatibility mode.
+        // `commonjs` is disallowed.
+        if (sourceType === "commonjs") {
+          throw new Error(
+            "'commonjs' source type is only supported in ESLint compatibility mode.\n" +
+              "Enable ESLint compatibility mode by setting `eslintCompat` to `true` in the config / test case.",
+          );
+        }
+      }
+
+      parseOptions.sourceType = sourceType;
+    }
+
+    const { parserOptions } = languageOptions;
+    if (parserOptions != null) {
+      const { lang } = parserOptions;
+      if (lang != null) {
+        parseOptions.lang = lang;
+        ext = lang === "dts" ? "d.ts" : lang;
+      } else if (parserOptions.ecmaFeatures?.jsx === true) {
+        parseOptions.lang = "jsx";
+        ext = "jsx";
+      }
+    }
+  }
+
+  // Get file path from test case
+  let path = test.filename;
+  if (path == null) path = `${DEFAULT_FILENAME_BASE}.${ext}`;
 
   // Initialize `allOptions` if not already initialized
   if (allOptions === null) initAllOptions();
@@ -726,8 +837,7 @@ function lint(test: TestCase, plugin: Plugin, config: Config): Diagnostic[] {
     }
 
     // Parse file into buffer
-    const path = test.filename ?? DEFAULT_PATH;
-    parse(path, test.code);
+    parse(path, test.code, parseOptions);
 
     // Lint file.
     // Buffer is stored already, at index 0. No need to pass it.
@@ -993,6 +1103,11 @@ function isSerializablePrimitiveOrPlainObject(value: unknown): boolean {
 
 // Add types to `RuleTester` namespace
 type _Config = Config;
+type _LanguageOptions = LanguageOptions;
+type _ParserOptions = ParserOptions;
+type _SourceType = SourceType;
+type _Language = Language;
+type _EcmaFeatures = EcmaFeatures;
 type _DescribeFn = DescribeFn;
 type _ItFn = ItFn;
 type _ValidTestCase = ValidTestCase;
@@ -1002,6 +1117,11 @@ type _Error = Error;
 
 export namespace RuleTester {
   export type Config = _Config;
+  export type LanguageOptions = _LanguageOptions;
+  export type ParserOptions = _ParserOptions;
+  export type SourceType = _SourceType;
+  export type Language = _Language;
+  export type EcmaFeatures = _EcmaFeatures;
   export type DescribeFn = _DescribeFn;
   export type ItFn = _ItFn;
   export type ValidTestCase = _ValidTestCase;

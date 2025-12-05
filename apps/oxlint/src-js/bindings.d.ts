@@ -59,7 +59,14 @@ export declare function lint(args: Array<string>, loadPlugin: JsLoadPluginCb, se
  *
  * Panics if source text is too long, or AST takes more memory than is available in the buffer.
  */
-export declare function parseRawSync(filename: string, buffer: Uint8Array, sourceLen: number): void
+export declare function parseRawSync(filename: string, buffer: Uint8Array, sourceLen: number, options?: ParserOptions | undefined | null): void
+
+export interface ParserOptions {
+  /** Treat the source text as `js`, `jsx`, `ts`, `tsx` or `dts`. */
+  lang?: 'js' | 'jsx' | 'ts' | 'tsx' | 'dts'
+  /** Treat the source text as `script` or `module` code. */
+  sourceType?: 'script' | 'module' | 'unambiguous' | undefined
+}
 
 /** Returns `true` if raw transfer is supported on this platform. */
 export declare function rawTransferSupported(): boolean

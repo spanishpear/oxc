@@ -23,6 +23,19 @@ const BUMP_ALIGN: usize = 16;
 /// Allocator bumps downwards, so if source text was empty, the program would be somewhere at end of the buffer.
 const PARSE_FAIL_SENTINEL: u32 = 0;
 
+// Parser options
+#[napi(object)]
+#[derive(Default)]
+pub struct ParserOptions {
+    /// Treat the source text as `js`, `jsx`, `ts`, `tsx` or `dts`.
+    #[napi(ts_type = "'js' | 'jsx' | 'ts' | 'tsx' | 'dts'")]
+    pub lang: Option<String>,
+
+    /// Treat the source text as `script` or `module` code.
+    #[napi(ts_type = "'script' | 'module' | 'unambiguous' | undefined")]
+    pub source_type: Option<String>,
+}
+
 /// Get offset within a `Uint8Array` which is aligned on `BUFFER_ALIGN`.
 ///
 /// Does not check that the offset is within bounds of `buffer`.
@@ -62,13 +75,18 @@ pub fn get_buffer_offset(buffer: Uint8Array) -> u32 {
 /// Panics if source text is too long, or AST takes more memory than is available in the buffer.
 #[napi]
 #[allow(clippy::needless_pass_by_value, clippy::allow_attributes)]
-pub unsafe fn parse_raw_sync(filename: String, mut buffer: Uint8Array, source_len: u32) {
+pub unsafe fn parse_raw_sync(
+    filename: String,
+    mut buffer: Uint8Array,
+    source_len: u32,
+    options: Option<ParserOptions>,
+) {
     // SAFETY: This function is called synchronously, so buffer cannot be mutated outside this function
     // during the time this `&mut [u8]` exists
     let buffer = unsafe { buffer.as_mut() };
 
     // SAFETY: `parse_raw_impl` has same safety requirements as this function
-    unsafe { parse_raw_impl(&filename, buffer, source_len) };
+    unsafe { parse_raw_impl(&filename, buffer, source_len, options) };
 }
 
 /// Parse AST into buffer.
@@ -83,7 +101,12 @@ pub unsafe fn parse_raw_sync(filename: String, mut buffer: Uint8Array, source_le
 /// If source text is originally a JS string on JS side, and converted to a buffer with
 /// `Buffer.from(str)` or `new TextEncoder().encode(str)`, this guarantees it's valid UTF-8.
 #[allow(clippy::items_after_statements, clippy::allow_attributes)]
-unsafe fn parse_raw_impl(filename: &str, buffer: &mut [u8], source_len: u32) {
+unsafe fn parse_raw_impl(
+    filename: &str,
+    buffer: &mut [u8],
+    source_len: u32,
+    options: Option<ParserOptions>,
+) {
     // Check buffer has expected size and alignment
     assert_eq!(buffer.len(), BUFFER_SIZE);
     let buffer_ptr = ptr::from_mut(buffer).cast::<u8>();
@@ -118,9 +141,11 @@ unsafe fn parse_raw_impl(filename: &str, buffer: &mut [u8], source_len: u32) {
     let allocator = ManuallyDrop::new(allocator);
 
     // Parse source.
-    // Enclose parsing logic in a scope to make 100% sure no references to within `Allocator` exist after this.
-    let source_type = SourceType::from_path(filename).unwrap_or_default();
+    let options = options.unwrap_or_default();
+    let source_type =
+        get_source_type(filename, options.lang.as_deref(), options.source_type.as_deref());
 
+    // Enclose parsing logic in a scope to make 100% sure no references to within `Allocator` exist after this.
     let program_offset = {
         // SAFETY: We checked above that `source_len` does not exceed length of buffer
         let source_text = unsafe { buffer.get_unchecked(..source_len) };
@@ -169,5 +194,27 @@ unsafe fn parse_raw_impl(filename: &str, buffer: &mut [u8], source_len: u32) {
     #[expect(clippy::cast_ptr_alignment)]
     unsafe {
         buffer_ptr.add(RAW_METADATA_OFFSET).cast::<RawTransferMetadata>().write(metadata);
+    }
+}
+
+/// Copied from `napi/parser/src/lib.rs`
+pub fn get_source_type(
+    filename: &str,
+    lang: Option<&str>,
+    source_type: Option<&str>,
+) -> SourceType {
+    let ty = match lang {
+        Some("js") => SourceType::mjs(),
+        Some("jsx") => SourceType::jsx(),
+        Some("ts") => SourceType::ts(),
+        Some("tsx") => SourceType::tsx(),
+        Some("dts") => SourceType::d_ts(),
+        _ => SourceType::from_path(filename).unwrap_or_default(),
+    };
+    match source_type {
+        Some("script") => ty.with_script(true),
+        Some("module") => ty.with_module(true),
+        Some("unambiguous") => ty.with_unambiguous(true),
+        _ => ty,
     }
 }
