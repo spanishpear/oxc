@@ -1,4 +1,3 @@
-import assert from "node:assert";
 import { RuleTester } from "#oxlint";
 import { describe, it } from "./capture.ts";
 import { FILTER_CODE } from "./filter.ts";
@@ -9,6 +8,10 @@ type Config = RuleTester.Config;
 type DescribeFn = RuleTester.DescribeFn;
 type ItFn = RuleTester.ItFn;
 type TestCases = RuleTester.TestCases;
+type ValidTestCase = RuleTester.ValidTestCase;
+type InvalidTestCase = RuleTester.InvalidTestCase;
+type TestCase = ValidTestCase | InvalidTestCase;
+type LanguageOptions = RuleTester.LanguageOptions;
 
 // Set up `RuleTester` to use our hooks
 RuleTester.describe = describe;
@@ -23,13 +26,10 @@ RuleTester.setDefaultConfig({ ...DEFAULT_SHARED_CONFIG });
  * Prevents disabling ESLint compatibility mode or overriding `describe` and `it` properties.
  */
 class RuleTesterShim extends RuleTester {
-  // Prevent setting `eslintCompat: false`
+  // Prevent setting `eslintCompat` property
 
   constructor(config?: Config) {
-    assert(
-      config == null || !("eslintCompat" in config),
-      "Cannot set `eslintCompat` property of config",
-    );
+    if (config != null) config = modifyConfigOrTestCase(config);
     super(config);
   }
 
@@ -38,9 +38,10 @@ class RuleTesterShim extends RuleTester {
       throw new TypeError("`config` must be an object");
     }
 
-    assert(!("eslintCompat" in config), "Cannot set `eslintCompat` property of config");
+    config = modifyConfigOrTestCase(config);
+    config = { ...config, eslintCompat: true };
 
-    super.setDefaultConfig({ ...config, eslintCompat: true });
+    super.setDefaultConfig(config);
   }
 
   static resetDefaultConfig() {
@@ -61,13 +62,11 @@ class RuleTesterShim extends RuleTester {
     }
 
     // Prevent setting `eslintCompat` property
-    for (const test of valid) {
-      if (typeof test === "string") continue;
-      assert(!("eslintCompat" in test), "Cannot set `eslintCompat` property of test");
-    }
-    for (const test of invalid) {
-      assert(!("eslintCompat" in test), "Cannot set `eslintCompat` property of test");
-    }
+    valid = valid.map((test) => {
+      if (typeof test === "string") return test;
+      return modifyConfigOrTestCase(test);
+    });
+    invalid = invalid.map(modifyConfigOrTestCase);
 
     tests = { ...tests, valid, invalid };
 
@@ -99,6 +98,19 @@ class RuleTesterShim extends RuleTester {
   static set itOnly(_value: ItFn) {
     throw new Error("Cannot override `itOnly` property");
   }
+}
+
+/**
+ * Modify config or test case.
+ *
+ * Throw error if has `eslintCompat` property.
+ *
+ * @param test - Test case
+ * @returns Modified test case
+ */
+function modifyConfigOrTestCase<T extends Config | TestCase>(value: T): T {
+  if ("eslintCompat" in value) throw new Error("Cannot set `eslintCompat` property");
+  return value;
 }
 
 export { RuleTesterShim as RuleTester };
