@@ -7,9 +7,9 @@
 | Status            | Count |
 |-------------------|-------|
 | Total rules       |   292 |
-| Fully passing     |   157 |
-| Partially passing |   129 |
-| Fully failing     |     6 |
+| Fully passing     |   164 |
+| Partially passing |   123 |
+| Fully failing     |     5 |
 | Load errors       |     0 |
 | No tests run      |     0 |
 
@@ -18,8 +18,8 @@
 | Status      | Count |
 |-------------|-------|
 | Total tests | 33090 |
-| Passing     | 26493 |
-| Failing     |  6597 |
+| Passing     | 26738 |
+| Failing     |  6352 |
 
 ## Fully Passing Rules
 
@@ -28,6 +28,7 @@
 - `block-spacing` (101 tests)
 - `callback-return` (78 tests)
 - `capitalized-comments` (178 tests)
+- `comma-spacing` (173 tests)
 - `comma-style` (96 tests)
 - `curly` (216 tests)
 - `default-case-last` (37 tests)
@@ -43,12 +44,14 @@
 - `id-length` (181 tests)
 - `id-match` (98 tests)
 - `implicit-arrow-linebreak` (62 tests)
+- `jsx-quotes` (18 tests)
 - `key-spacing` (153 tests)
 - `line-comment-position` (38 tests)
 - `linebreak-style` (12 tests)
 - `lines-between-class-members` (112 tests)
 - `max-classes-per-file` (17 tests)
 - `max-depth` (25 tests)
+- `max-len` (108 tests)
 - `max-lines-per-function` (43 tests)
 - `max-lines` (47 tests)
 - `max-nested-callbacks` (14 tests)
@@ -94,6 +97,7 @@
 - `no-func-assign` (15 tests)
 - `no-implicit-coercion` (134 tests)
 - `no-import-assign` (116 tests)
+- `no-inline-comments` (49 tests)
 - `no-invalid-regexp` (108 tests)
 - `no-iterator` (9 tests)
 - `no-label-var` (5 tests)
@@ -103,6 +107,7 @@
 - `no-mixed-spaces-and-tabs` (61 tests)
 - `no-multi-assign` (31 tests)
 - `no-multi-spaces` (130 tests)
+- `no-multi-str` (7 tests)
 - `no-negated-condition` (19 tests)
 - `no-negated-in-lhs` (3 tests)
 - `no-nested-ternary` (4 tests)
@@ -124,6 +129,7 @@
 - `no-restricted-exports` (183 tests)
 - `no-restricted-modules` (44 tests)
 - `no-restricted-properties` (89 tests)
+- `no-restricted-syntax` (32 tests)
 - `no-return-assign` (30 tests)
 - `no-return-await` (71 tests)
 - `no-script-url` (10 tests)
@@ -143,6 +149,7 @@
 - `no-unused-private-class-members` (39 tests)
 - `no-useless-call` (44 tests)
 - `no-useless-catch` (16 tests)
+- `no-useless-escape` (288 tests)
 - `no-void` (12 tests)
 - `no-warning-comments` (61 tests)
 - `no-with` (2 tests)
@@ -4986,63 +4993,6 @@ AssertionError [ERR_ASSERTION]: Should have 2 errors but had 1: [
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-### `comma-spacing`
-
-Pass: 169 / 173 (97.7%)
-Fail: 4 / 173 (2.3%)
-
-#### comma-spacing > valid
-
-```js
-<a>,</a>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### comma-spacing > valid
-
-```js
-<a>  ,  </a>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### comma-spacing > valid
-
-```js
-<a>Hello, world</a>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### comma-spacing > invalid
-
-```js
-<a>{foo(1 ,2)}</a>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 ### `complexity`
@@ -13233,8 +13183,8 @@ TypeError: Expected `loc` to be an object with integer `line` and `column` prope
 
 ### `indent`
 
-Pass: 168 / 1090 (15.4%)
-Fail: 922 / 1090 (84.6%)
+Pass: 188 / 1090 (17.2%)
+Fail: 902 / 1090 (82.8%)
 
 #### indent > valid
 
@@ -34227,43 +34177,45 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
 #### indent > valid
 
 ```js
-<Foo a="b" c="d"/>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
 <Foo
     a="b"
     c="d"
 />;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-var foo = <Bar a="b" c="d"/>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34275,11 +34227,39 @@ var foo = <Bar
 />;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34291,11 +34271,39 @@ var foo = (<Bar
 />);
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34309,11 +34317,39 @@ var foo = (
 );
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 8,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34326,11 +34362,51 @@ Error: Parsing failed
 />;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34341,11 +34417,39 @@ Error: Parsing failed
     c="d"/>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34357,39 +34461,51 @@ Error: Parsing failed
     c="d"/>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<a href="foo">bar</a>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<a href="foo">
-    bar
-</a>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34402,11 +34518,27 @@ Error: Parsing failed
 </a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34418,11 +34550,27 @@ Error: Parsing failed
 </a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34435,11 +34583,39 @@ Error: Parsing failed
 </a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34452,11 +34628,39 @@ Error: Parsing failed
     a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34469,26 +34673,27 @@ Error: Parsing failed
 >;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-var foo = <a href="bar">
-    baz
-</a>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34501,11 +34706,27 @@ var foo = <a
 </a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34517,11 +34738,27 @@ var foo = <a
 </a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34534,11 +34771,39 @@ var foo = <
 </a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34551,11 +34816,39 @@ var foo = <a
     a>;
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34568,11 +34861,27 @@ var foo = <a
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34584,43 +34893,27 @@ var foo = (<a
 </a>);
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-var foo = (
-    <a href="bar">baz</a>
-);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-var foo = (
-    <a href="bar">
-        baz
-    </a>
-);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34634,24 +34927,27 @@ var foo = (
 );
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-var foo = <a href="bar">baz</a>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34663,11 +34959,39 @@ Error: Parsing failed
 </a>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXEmptyExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34680,11 +35004,51 @@ Error: Parsing failed
 </a>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34706,38 +35070,159 @@ function foo() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 12: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 16.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 16,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 20.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 20,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 20.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 20,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 24.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'MemberExpression',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 24,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 24.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'MemberExpression',
+    line: 9,
+    column: 0,
+    endLine: 9,
+    endColumn: 24,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 16.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 10,
+    column: 0,
+    endLine: 10,
+    endColumn: 16,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 11,
+    column: 0,
+    endLine: 11,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 12,
+    column: 0,
+    endLine: 12,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 13,
+    column: 0,
+    endLine: 13,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+12 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<App></App>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<App>
-</App>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34748,26 +35233,27 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<App>
-<Foo />
-</App>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34778,11 +35264,27 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 1,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34795,11 +35297,51 @@ function App() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34812,11 +35354,51 @@ function App() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34831,11 +35413,75 @@ function App() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+5 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34850,11 +35496,75 @@ it(
 )
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'CallExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'CallExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'CallExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+5 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34869,11 +35579,75 @@ it(
 )
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'CallExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+5 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34886,11 +35660,27 @@ Error: Parsing failed
 )
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34904,11 +35694,39 @@ Error: Parsing failed
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34922,11 +35740,39 @@ Error: Parsing failed
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34940,11 +35786,63 @@ Error: Parsing failed
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 4: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'LogicalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+4 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34959,11 +35857,75 @@ Error: Parsing failed
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'LogicalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'LogicalExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+5 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34975,11 +35937,39 @@ Error: Parsing failed
 ]
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -34995,11 +35985,87 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 6: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+6 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35015,29 +36081,63 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 4: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 8 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 8 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+4 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<div>
-bar <div>
-    bar
-    bar {foo}
-bar </div>
-</div>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35048,11 +36148,39 @@ foo ?
     <Bar />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35063,11 +36191,39 @@ foo ?
     : <Bar />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35079,11 +36235,51 @@ foo ?
     <Bar />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35102,11 +36298,123 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 9: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 9,
+    column: 0,
+    endLine: 9,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 10,
+    column: 0,
+    endLine: 10,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+9 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35122,11 +36430,87 @@ Error: Parsing failed
 </span>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 6: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+6 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35142,11 +36526,87 @@ Error: Parsing failed
 </span>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 6: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+6 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35164,25 +36624,111 @@ function foo() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 8: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 9,
+    column: 0,
+    endLine: 9,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+8 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<App foo
-/>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35193,26 +36739,27 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-<App
-foo
-/>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35223,11 +36770,27 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35238,11 +36801,27 @@ Error: Parsing failed
 ></App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35255,11 +36834,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35271,11 +36890,27 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35290,11 +36925,75 @@ var x = function() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+5 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35307,11 +37006,51 @@ var x = <App
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35328,11 +37067,87 @@ Error: Parsing failed
 </Provider>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 6: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+6 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35349,11 +37164,87 @@ Error: Parsing failed
 </Provider>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 6: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+6 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35364,11 +37255,27 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 1,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35379,11 +37286,27 @@ Error: Parsing failed
 ></App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 1,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35395,11 +37318,27 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 1,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35412,11 +37351,51 @@ var x = <App
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 1,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 1,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35426,11 +37405,27 @@ Error: Parsing failed
     foo />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35443,11 +37438,39 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35459,11 +37482,27 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35482,11 +37521,87 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 6: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingElement',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 9,
+    column: 0,
+    endLine: 9,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 10,
+    column: 0,
+    endLine: 10,
+    endColumn: 8,
+    suggestions: null
+  }
+]
+
+6 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35499,11 +37614,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 8,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35516,11 +37671,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 8,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35533,30 +37728,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 8,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-foo ? (
-    <div>
-    </div>
-) : (
-    <span>
-    </span>
-)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35569,11 +37785,51 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXEmptyExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXEmptyExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35584,11 +37840,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35600,11 +37872,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35616,11 +37904,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35632,11 +37920,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35649,11 +37953,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35666,11 +37986,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35682,11 +38002,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35699,11 +38035,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35716,11 +38068,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35732,11 +38100,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35749,11 +38117,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35766,11 +38134,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35782,11 +38150,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35799,11 +38183,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35816,11 +38216,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35832,11 +38248,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35849,11 +38281,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35866,11 +38314,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35885,11 +38349,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35904,11 +38384,27 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -35920,11 +38416,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35936,11 +38432,11 @@ Error: Parsing failed
     /* Comment */ />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35952,11 +38448,11 @@ Error: Parsing failed
 /* Comment */ />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35969,11 +38465,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -35986,11 +38482,11 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > valid
@@ -36002,11 +38498,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36018,11 +38530,27 @@ Error: Parsing failed
     /* Comment */ >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36034,11 +38562,27 @@ Error: Parsing failed
 /* Comment */ >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36051,11 +38595,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36068,11 +38628,27 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36087,11 +38663,75 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+5 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36111,11 +38751,135 @@ function A() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 10: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 16.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 16,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 8 spaces but found 20.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'LogicalExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 20,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 8 spaces but found 20.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 7,
+    column: 0,
+    endLine: 7,
+    endColumn: 20,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 16.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'LogicalExpression',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 16,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 12.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 9,
+    column: 0,
+    endLine: 9,
+    endColumn: 12,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 10,
+    column: 0,
+    endLine: 10,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 11,
+    column: 0,
+    endLine: 11,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+10 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36126,11 +38890,27 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36141,11 +38921,27 @@ Error: Parsing failed
 </small>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36156,11 +38952,27 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36173,11 +38985,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have no errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXSpreadAttribute',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXSpreadAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 0
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > valid
@@ -36280,36 +39132,6 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
 #### indent > valid
 
 ```js
-<Foo
-            bar="1" />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
-foo &&
-<Bar
->
-</Bar>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > valid
-
-```js
 (function($) {
 $(function() {
     foo;
@@ -36385,23 +39207,6 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 2: [
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### indent > valid
-
-```js
-<foo
-    prop='bar'
-    >
-    Text
-</foo>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### indent > valid
@@ -50050,11 +52855,17 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Hydrated message "Expected indentation of 4 spaces but found 2." does not match "Expected indentation of 0 spaces but found 2."
++ actual - expected
+
++ 'Expected indentation of 0 spaces but found 2.'
+- 'Expected indentation of 4 spaces but found 2.'
+                           ^
+
+    at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50065,11 +52876,17 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Hydrated message "Expected indentation of 2 spaces but found 4." does not match "Expected indentation of 0 spaces but found 4."
++ actual - expected
+
++ 'Expected indentation of 0 spaces but found 4.'
+- 'Expected indentation of 2 spaces but found 4.'
+                           ^
+
+    at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50080,11 +52897,17 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Hydrated message "Expected indentation of 1 tab but found 4 spaces." does not match "Expected indentation of 0 tabs but found 4 spaces."
++ actual - expected
+
++ 'Expected indentation of 0 tabs but found 4 spaces.'
+- 'Expected indentation of 1 tab but found 4 spaces.'
+                           ^
+
+    at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50097,11 +52920,51 @@ function App() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 9.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 9,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50114,11 +52977,51 @@ function App() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50133,11 +53036,63 @@ function App() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 3 errors but had 4: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 0.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 0,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 0.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 0,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+4 !== 3
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50148,11 +53103,17 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Hydrated message "Expected indentation of 4 spaces but found 1." does not match "Expected indentation of 0 spaces but found 1."
++ actual - expected
+
++ 'Expected indentation of 0 spaces but found 1.'
+- 'Expected indentation of 4 spaces but found 1.'
+                           ^
+
+    at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50167,11 +53128,75 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrowFunctionExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 11.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 11,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrowFunctionExpression',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+5 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50183,11 +53208,39 @@ Error: Parsing failed
 ]
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ArrayExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50200,11 +53253,17 @@ Error: Parsing failed
 </App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Hydrated message "Expected indentation of 1 tab but found 1 space." does not match "Expected indentation of 0 tabs but found 1 space."
++ actual - expected
+
++ 'Expected indentation of 0 tabs but found 1 space.'
+- 'Expected indentation of 1 tab but found 1 space.'
+                           ^
+
+    at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50215,11 +53274,17 @@ foo ?
 <Bar />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Hydrated message "Expected indentation of 4 spaces but found 0." does not match "Expected indentation of 0 spaces but found 4."
++ actual - expected
+
++ 'Expected indentation of 0 spaces but found 4.'
+- 'Expected indentation of 4 spaces but found 0.'
+                           ^
+
+    at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50231,11 +53296,27 @@ foo ?
 <Bar />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 2 errors but had 1: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ConditionalExpression',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+1 !== 2
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50247,11 +53328,14 @@ foo ? (
 <Bar />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
+
+0 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50262,11 +53346,17 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Hydrated message "Expected indentation of 4 spaces but found 2." does not match "Expected indentation of 0 spaces but found 2."
++ actual - expected
+
++ 'Expected indentation of 0 spaces but found 2.'
+- 'Expected indentation of 4 spaces but found 2.'
+                           ^
+
+    at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50277,11 +53367,39 @@ Error: Parsing failed
   />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50292,11 +53410,39 @@ Error: Parsing failed
   ></App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50314,11 +53460,99 @@ const Button = function(props) {
 };
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 7: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 36.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 36,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 2 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'ReturnStatement',
+    line: 9,
+    column: 0,
+    endLine: 9,
+    endColumn: 2,
+    suggestions: null
+  }
+]
+
+7 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50331,11 +53565,51 @@ var x = function() {
 }
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'BlockStatement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 9.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 9,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50346,27 +53620,39 @@ var x = <App
         />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 2.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 2,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 8,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > invalid
-
-```js
-var x = (
-  <Something
-    />
-)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50377,11 +53663,39 @@ Error: Parsing failed
 \u0009/>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 1,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 1,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50392,11 +53706,39 @@ Error: Parsing failed
 \u0009></App>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 1,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 tabs but found 1.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 1,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50415,11 +53757,87 @@ Error: Parsing failed
 >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 4 errors but had 6: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingElement',
+    line: 8,
+    column: 0,
+    endLine: 8,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 9,
+    column: 0,
+    endLine: 9,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXMemberExpression',
+    line: 10,
+    column: 0,
+    endLine: 10,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+6 !== 4
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50432,11 +53850,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50449,11 +53907,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50466,30 +53964,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### indent > invalid
-
-```js
-foo ? (
-    <div>
-    </div>
-) : (
-        <span>
-        </span>
-    )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50504,11 +54023,75 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 3 errors but had 5: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 4 spaces but found 8.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 8,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXExpressionContainer',
+    line: 6,
+    column: 0,
+    endLine: 6,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+5 !== 3
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50521,11 +54104,51 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXEmptyExpression',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXEmptyExpression',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50536,11 +54159,14 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
+
+0 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50553,11 +54179,51 @@ Error: Parsing failed
 />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningElement',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 6.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXSpreadAttribute',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 6,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXSpreadAttribute',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50568,11 +54234,14 @@ Error: Parsing failed
 </div>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
+
+0 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50583,11 +54252,14 @@ Error: Parsing failed
 </small>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
+
+0 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50598,11 +54270,14 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
+
+0 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50614,11 +54289,39 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningFragment',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50630,11 +54333,11 @@ Error: Parsing failed
     />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > invalid
@@ -50646,11 +54349,39 @@ Error: Parsing failed
     >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingFragment',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50663,11 +54394,51 @@ Error: Parsing failed
     >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 2 errors but had 3: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningFragment',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingFragment',
+    line: 5,
+    column: 0,
+    endLine: 5,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+3 !== 2
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50680,11 +54451,11 @@ Error: Parsing failed
     />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > invalid
@@ -50696,11 +54467,39 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningFragment',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50712,11 +54511,11 @@ Error: Parsing failed
     />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > invalid
@@ -50728,11 +54527,39 @@ Error: Parsing failed
     >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingFragment',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50744,11 +54571,39 @@ Error: Parsing failed
 </>
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXOpeningFragment',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 3,
+    column: 0,
+    endLine: 3,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -50760,11 +54615,11 @@ Error: Parsing failed
     />
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
+ie: Identifier expected.
+    at B (apps/oxlint/dist/ts_eslint.cjs)
+    at d (apps/oxlint/dist/ts_eslint.cjs)
+    at a (apps/oxlint/dist/ts_eslint.cjs)
+    at C (apps/oxlint/dist/ts_eslint.cjs)
 
 
 #### indent > invalid
@@ -50776,11 +54631,39 @@ Error: Parsing failed
     >
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
+AssertionError [ERR_ASSERTION]: Should have 1 error but had 2: [
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXText',
+    line: 2,
+    column: 0,
+    endLine: 2,
+    endColumn: 4,
+    suggestions: null
+  },
+  {
+    ruleId: 'rule-to-test/indent',
+    message: 'Expected indentation of 0 spaces but found 4.',
+    messageId: 'wrongIndentation',
+    severity: 1,
+    nodeType: 'JSXClosingFragment',
+    line: 4,
+    column: 0,
+    endLine: 4,
+    endColumn: 4,
+    suggestions: null
+  }
+]
+
+2 !== 1
+
+    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
+    at apps/oxlint/dist/index.js
 
 
 #### indent > invalid
@@ -55573,457 +59456,10 @@ Error: Parsing failed
     at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
-### `jsx-quotes`
-
-Pass: 0 / 18 (0.0%)
-Fail: 18 / 18 (100.0%)
-
-#### jsx-quotes > valid
-
-```js
-<foo bar="baz" />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar='"' />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar="'" />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar='baz' />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar="baz">"</foo>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar='baz'>'</foo>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar={'baz'} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar={"baz"} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar={baz} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar='&quot;' />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar="&quot;" />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar='&#39;' />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > valid
-
-```js
-<foo bar="&#39;" />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > invalid
-
-```js
-<foo bar='baz' />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > invalid
-
-```js
-<foo bar="baz" />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > invalid
-
-```js
-<foo bar="&quot;" />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### jsx-quotes > invalid
-
-```js
-<foo bar='&#39;' />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
 ### `keyword-spacing`
 
-Pass: 1044 / 1078 (96.8%)
-Fail: 34 / 1078 (3.2%)
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={async function foo() {}} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ async function foo() {}} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-async function wrap() { <Foo onClick={await a} /> }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-async function wrap() { <Foo onClick={ await a} /> }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={class {}} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ class{}} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={delete foo.a} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ delete foo.a} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={function() {}} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ function() {}} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={new foo()} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ new foo()} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-function foo() { return <p/>; }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-function foo() { return<p/>; }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-class A extends B { constructor() { <Foo onClick={super()} /> } }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-class A extends B { constructor() { <Foo onClick={ super() } /> } }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 1070 / 1078 (99.3%)
+Fail: 8 / 1078 (0.7%)
 
 #### keyword-spacing > valid
 
@@ -56042,84 +59478,6 @@ Error: Parsing failed
 
 ```js
 <Thing>this.blah
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={this} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ this } />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={typeof foo} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ typeof foo} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={void foo} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-<Foo onClick={ void foo} />
 ```
 
 Error: Parsing failed
@@ -56158,32 +59516,6 @@ Error: Parsing failed
 #### keyword-spacing > valid
 
 ```js
-function* foo() { <Foo onClick={yield} /> }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
-function* foo() { <Foo onClick={ yield } /> }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > valid
-
-```js
 class Foo { @dec get bar() {} @dec set baz() {} @dec async baw() {} }
 ```
 
@@ -56205,32 +59537,6 @@ Error: Parsing failed
     at lint (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > invalid
-
-```js
-function foo() { return<p/>; }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### keyword-spacing > invalid
-
-```js
-function foo() { return <p/>; }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 #### keyword-spacing > invalid
@@ -57002,599 +60308,6 @@ Error: Parsing failed
 
 ```js
 (a.b.c || (a.b.c = d)) as number
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-### `max-len`
-
-Pass: 70 / 108 (64.8%)
-Fail: 38 / 108 (35.2%)
-
-#### max-len > valid
-
-```js
-var foo = <div className="this is a very long string"></div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  { /* this line has 38 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-\u0009\u0009{ /* this line has 40 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  <> text </>{ /* this line has 49 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line has 44 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line has 44 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = <Foo
-         attr = {a && b/* this line has 57 characters */}
-></Foo>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = <Foo
-         attr = {/* this line has 57 characters */a && b}
-></Foo>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = <Foo
-         attr = 
-          {a & b/* this line has 50 characters */}
-></Foo>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  <> </> {/* this line with two separate comments */} {/* have 80 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line with two separate comments */} {/* have 80 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line with two separate comments */} {/* have 80 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line with two separate comments */} {/* have > 80 characters */ /* another comment in same braces */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line with two separate comments */} {/* have > 80 characters */ /* another comment in same braces */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/*
-       this line has 34 characters
-   */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {/*
-       this line has 34 characters
-   */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {a & b /* this line has 34 characters
-   */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > valid
-
-```js
-var jsx = (<>
-  {a & b /* this line has 34 characters
-   */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var foo = <div>this is a very very very long string</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-  { /* this line has 38 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-\u0009\u0009{ /* this line has 40 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-{ 38/* this line has 38 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-{ 38/* this line has 38 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-{ 38/* this line has 38 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-   <> 50 </>{ 50/* this line has 50 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-         {/* this line has 44 characters */}
-  <> </> {/* this line has 44 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = <Foo
-         attr = {a && b/* this line has 57 characters */}
-></Foo>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = <Foo
-         attr = {/* this line has 57 characters */a && b}
-></Foo>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = <Foo
-         attr = {a & b/* this line has 56 characters */}
-></Foo>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = <Foo
-         attr = 
-          {a & b /* this line has 51 characters */}
-></Foo>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line with two separate comments */} {/* have 80 characters */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-  <> </> {/* this line with two separate comments */} {/* have 87 characters */} <> </>
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line with two separate comments */} {/* have 87 characters */} <> </>
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this line with two separate comments */} {/* have > 80 characters */ /* another comment in same braces */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this is not treated as a comment */ a & b} {/* trailing */ /* comments */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-  {/* this line has 37 characters */}
-  <> </> {/* this is not treated as a comment */ a & b} {/* trailing */ /* comments */}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-12345678901234{/*
-*/}
-</>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-len > invalid
-
-```js
-var jsx = (<>
-{/*
-this line has 31 characters */}
-</>)
 ```
 
 Error: Parsing failed
@@ -58496,8 +61209,8 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
 
 ### `no-array-constructor`
 
-Pass: 119 / 146 (81.5%)
-Fail: 27 / 146 (18.5%)
+Pass: 121 / 146 (82.9%)
+Fail: 25 / 146 (17.1%)
 
 #### no-array-constructor > valid
 
@@ -58526,38 +61239,6 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### no-array-constructor > invalid
-
-```js
-
-                <foo />
-                Array()
-                
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-array-constructor > invalid
-
-```js
-
-                <foo></foo>
-                Array()
-                
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 #### no-array-constructor > valid
@@ -59027,60 +61708,8 @@ TypeError: Cannot convert object to primitive value
 
 ### `no-constant-binary-expression`
 
-Pass: 221 / 260 (85.0%)
-Fail: 39 / 260 (15.0%)
-
-#### no-constant-binary-expression > valid
-
-```js
-<p /> && foo
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-constant-binary-expression > valid
-
-```js
-<></> && foo
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-constant-binary-expression > valid
-
-```js
-<p /> ?? foo
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-constant-binary-expression > valid
-
-```js
-<></> ?? foo
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 225 / 260 (86.5%)
+Fail: 35 / 260 (13.5%)
 
 #### no-constant-binary-expression > invalid
 
@@ -77628,8 +80257,8 @@ Error: Parsing failed
 
 ### `no-extra-parens`
 
-Pass: 979 / 1072 (91.3%)
-Fail: 93 / 1072 (8.7%)
+Pass: 997 / 1072 (93.0%)
+Fail: 75 / 1072 (7.0%)
 
 #### no-extra-parens > valid
 
@@ -77710,275 +80339,6 @@ ie: Decimals with leading zeros are not allowed.
     at d (apps/oxlint/dist/ts_eslint.cjs)
     at a (apps/oxlint/dist/ts_eslint.cjs)
     at C (apps/oxlint/dist/ts_eslint.cjs)
-
-
-#### no-extra-parens > valid
-
-```js
-function a() {
-    return (
-        <JSX />
-    );
-}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-function a() {
-    return (
-        <></>
-    );
-}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (<div />)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = ((<div />))
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (<>
-  <p />
-</>);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = ((<>
-  <p />
-</>));
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (<div>
-  <p />
-</div>);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (
-  <div />
-);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component =
-  (<div />)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (<div />);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = ((<div />));
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (
-  <div />
-);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component =
-(<div />)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (
-<div>
-  <p />
-</div>
-);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = ((
-<div>
-  <p />
-</div>
-));
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (<div>
-  <p />
-</div>);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component =
-(<div>
-  <p />
-</div>);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-extra-parens > valid
-
-```js
-const Component = (<div
-  prop={true}
-/>)
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### no-extra-parens > valid
@@ -82448,587 +84808,6 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-### `no-inline-comments`
-
-Pass: 18 / 49 (36.7%)
-Fail: 31 / 49 (63.3%)
-
-#### no-inline-comments > valid
-
-```js
-var a = (
-            <div>
-            {/*comment*/}
-            </div>
-        )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > valid
-
-```js
-var a = (
-            <div>
-            { /* comment */ }
-            <h1>Some heading</h1>
-            </div>
-        )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > valid
-
-```js
-var a = (
-            <div>
-            {// comment
-            }
-            </div>
-        )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > valid
-
-```js
-var a = (
-            <div>
-            { // comment
-            }
-            </div>
-        )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > valid
-
-```js
-var a = (
-            <div>
-            {/* comment 1 */
-            /* comment 2 */}
-            </div>
-        )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > valid
-
-```js
-var a = (
-            <div>
-            {/*
-              * comment 1
-              */
-             /*
-              * comment 2
-              */}
-            </div>
-        )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > valid
-
-```js
-var a = (
-            <div>
-            {/*
-               multi
-               line
-               comment
-            */}
-            </div>
-        )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>{/* comment */}</div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>{// comment
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>{/* comment */
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>{/*
-                       * comment
-                       */
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>{/*
-                       * comment
-                       */}
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>{/*
-                       * comment
-                       */}</div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {/*
-                  * comment
-                  */}</div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                 /*
-                  * comment
-                  */}</div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                /* comment */}</div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {b/* comment */}
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {/* comment */b}
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {// comment
-                    b
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {/* comment */
-                    b
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {/*
-                  * comment
-                  */
-                    b
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    b// comment
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    /* comment */b
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    b/* comment */
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    b
-                /*
-                 * comment
-                 */}
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    b
-                /* comment */}
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    { /* this is an empty object literal, not braces for js code! */ }
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    {// comment
-                    }
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    {
-                    /* comment */}
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                { /* two comments on the same line... */ /* ...are not allowed, same as with a non-JSX code */}
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-inline-comments > invalid
-
-```js
-var a = (
-                <div>
-                {
-                    /* overlapping
-                    */ /*
-                       lines */
-                }
-                </div>
-            )
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 ### `no-inner-declarations`
@@ -90961,281 +92740,8 @@ TypeError: Cannot read properties of undefined (reading 'init')
 
 ### `no-irregular-whitespace`
 
-Pass: 236 / 280 (84.3%)
-Fail: 44 / 280 (15.7%)
-
-#### no-irregular-whitespace > valid
-
-```js
-<div>\u000b</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div>\u000c</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div></div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div>᠎</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div>﻿</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div>​</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > valid
-
-```js
-<div>　</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 278 / 280 (99.3%)
+Fail: 2 / 280 (0.7%)
 
 #### no-irregular-whitespace > valid
 
@@ -91289,279 +92795,6 @@ AssertionError [ERR_ASSERTION]: Actual error location does not match expected er
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div>\u000b</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div>\u000c</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div></div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div>᠎</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div>﻿</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div>​</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div> </div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-irregular-whitespace > invalid
-
-```js
-<div>　</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 ### `no-labels`
@@ -92172,47 +93405,8 @@ Error: Parsing failed
 
 ### `no-magic-numbers`
 
-Pass: 123 / 205 (60.0%)
-Fail: 82 / 205 (40.0%)
-
-#### no-magic-numbers > valid
-
-```js
-var a = <input maxLength={10} />;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-magic-numbers > valid
-
-```js
-var a = <div objectProp={{ test: 1}}></div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-magic-numbers > invalid
-
-```js
-var a = <div arrayProp={[1,2,3]}></div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 126 / 205 (61.5%)
+Fail: 79 / 205 (38.5%)
 
 #### no-magic-numbers > valid
 
@@ -93495,26 +94689,6 @@ AssertionError [ERR_ASSERTION]: Hydrated message "Unexpected mix of '-' and '/'.
     at apps/oxlint/dist/index.js
 
 
-### `no-multi-str`
-
-Pass: 6 / 7 (85.7%)
-Fail: 1 / 7 (14.3%)
-
-#### no-multi-str > valid
-
-```js
-var a = <div>
-<h1>Wat</h1>
-</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
 ### `no-multiple-empty-lines`
 
 Pass: 45 / 46 (97.8%)
@@ -94506,8 +95680,8 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
 
 ### `no-object-constructor`
 
-Pass: 53 / 56 (94.6%)
-Fail: 3 / 56 (5.4%)
+Pass: 55 / 56 (98.2%)
+Fail: 1 / 56 (1.8%)
 
 #### no-object-constructor > valid
 
@@ -94536,38 +95710,6 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### no-object-constructor > invalid
-
-```js
-
-                <foo />
-                Object()
-                
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-object-constructor > invalid
-
-```js
-
-                <foo></foo>
-                Object()
-                
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 ### `no-promise-executor-return`
@@ -98067,24 +99209,6 @@ Error: Parsing failed
     at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
-### `no-restricted-syntax`
-
-Pass: 31 / 32 (96.9%)
-Fail: 1 / 32 (3.1%)
-
-#### no-restricted-syntax > invalid
-
-```js
-const foo = [<div/>, <div/>]
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
 ### `no-self-assign`
 
 Pass: 84 / 85 (98.8%)
@@ -101051,8 +102175,8 @@ Error: Parsing failed
 
 ### `no-undef`
 
-Pass: 63 / 94 (67.0%)
-Fail: 31 / 94 (33.0%)
+Pass: 66 / 94 (70.2%)
+Fail: 28 / 94 (29.8%)
 
 #### no-undef > valid
 
@@ -101523,19 +102647,6 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
 #### no-undef > valid
 
 ```js
-var React, App, a=1; React.render(<App attr={a} />);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-undef > valid
-
-```js
 URLSearchParams;
 ```
 
@@ -101948,32 +103059,6 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### no-undef > invalid
-
-```js
-var React; React.render(<img attr={a} />);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-undef > invalid
-
-```js
-var React, App; React.render(<App attr={a} />);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 ### `no-undefined`
@@ -116951,99 +118036,8 @@ AssertionError [ERR_ASSERTION]: Should have 2 errors but had 1: [
 
 ### `no-unused-expressions`
 
-Pass: 98 / 124 (79.0%)
-Fail: 26 / 124 (21.0%)
-
-#### no-unused-expressions > valid
-
-```js
-<div />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > valid
-
-```js
-<></>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > valid
-
-```js
-var partial = <div />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > valid
-
-```js
-var partial = <div />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > valid
-
-```js
-var partial = <></>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > invalid
-
-```js
-<div />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > invalid
-
-```js
-<></>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 105 / 124 (84.7%)
+Fail: 19 / 124 (15.3%)
 
 #### no-unused-expressions > invalid
 
@@ -119346,8 +120340,8 @@ AssertionError [ERR_ASSERTION]: Hydrated message "'b' is defined but never used.
 
 ### `no-use-before-define`
 
-Pass: 289 / 347 (83.3%)
-Fail: 58 / 347 (16.7%)
+Pass: 293 / 347 (84.4%)
+Fail: 54 / 347 (15.6%)
 
 #### no-use-before-define > invalid
 
@@ -119940,74 +120934,6 @@ Error: Parsing failed
 \u0009
 \u0009let baz: Enum;
 \u0009enum Enum {}
-\u0009\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009import * as React from 'react';
-\u0009
-\u0009<div />;
-\u0009\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009import React from 'react';
-\u0009
-\u0009<div />;
-\u0009\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009import { h } from 'preact';
-\u0009
-\u0009<div />;
-\u0009\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009const React = require('react');
-\u0009
-\u0009<div />;
 \u0009\u0009  
 ```
 
@@ -121329,11 +122255,11 @@ TypeError: Cannot read properties of null (reading 'currentSegments')
             
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+TypeError: Cannot read properties of null (reading 'currentSegments')
+    at Identifier (apps/oxlint/conformance/submodules/eslint/lib/rules/no-useless-assignment.js:533:38)
+    at walkIdentifier (apps/oxlint/dist/lint.js)
+    at walkNode (apps/oxlint/dist/lint.js)
+    at walkFunctionDeclaration (apps/oxlint/dist/lint.js)
 
 
 #### no-useless-assignment > valid
@@ -121349,11 +122275,11 @@ Error: Parsing failed
             
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+TypeError: Cannot read properties of null (reading 'currentSegments')
+    at Identifier (apps/oxlint/conformance/submodules/eslint/lib/rules/no-useless-assignment.js:533:38)
+    at walkIdentifier (apps/oxlint/dist/lint.js)
+    at walkNode (apps/oxlint/dist/lint.js)
+    at walkFunctionDeclaration (apps/oxlint/dist/lint.js)
 
 
 #### no-useless-assignment > valid
@@ -121370,11 +122296,11 @@ Error: Parsing failed
             
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+TypeError: Cannot read properties of null (reading 'currentSegments')
+    at Identifier (apps/oxlint/conformance/submodules/eslint/lib/rules/no-useless-assignment.js:533:38)
+    at walkIdentifier (apps/oxlint/dist/lint.js)
+    at walkNode (apps/oxlint/dist/lint.js)
+    at walkFunctionDeclaration (apps/oxlint/dist/lint.js)
 
 
 #### no-useless-assignment > invalid
@@ -122367,102 +123293,6 @@ Error: Parsing failed
     at lint (apps/oxlint/dist/index.js)
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-### `no-useless-escape`
-
-Pass: 281 / 288 (97.6%)
-Fail: 7 / 288 (2.4%)
-
-#### no-useless-escape > valid
-
-```js
-<foo attr="\d"/>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-escape > valid
-
-```js
-<div> Testing: \ </div>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-escape > valid
-
-```js
-<div> Testing: &#x5C </div>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-escape > valid
-
-```js
-<foo attr='\d'></foo>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-escape > valid
-
-```js
-<> Testing: \ </>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-escape > valid
-
-```js
-<> Testing: &#x5C </>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-escape > invalid
-
-```js
-<foo attr={"\d"}/>
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
 
 
 ### `no-useless-rename`
@@ -123864,28 +124694,8 @@ AssertionError [ERR_ASSERTION]: Actual error location does not match expected er
 
 ### `padding-line-between-statements`
 
-Pass: 363 / 624 (58.2%)
-Fail: 261 / 624 (41.8%)
-
-#### padding-line-between-statements > valid
-
-```js
-var foo = (
-<div
-ref={function() {
-}}
->
-foo
-</div>
-);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 364 / 624 (58.3%)
+Fail: 260 / 624 (41.7%)
 
 #### padding-line-between-statements > invalid
 
@@ -129544,177 +130354,8 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
 
 ### `quotes`
 
-Pass: 92 / 113 (81.4%)
-Fail: 21 / 113 (18.6%)
-
-#### quotes > valid
-
-```js
-var foo = <>Hello world</>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <>Hello world</>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <>Hello world</>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <>Hello world</>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <div>Hello world</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <div id="foo"></div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <div>Hello world</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <div>Hello world</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <div id="foo"></div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > valid
-
-```js
-var foo = <div>Hello world</div>;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > invalid
-
-```js
-<div blah={"blah"} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > invalid
-
-```js
-<div blah={'blah'} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### quotes > invalid
-
-```js
-<div blah={'blah'} />
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
-    at runInvalidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 105 / 113 (92.9%)
+Fail: 8 / 113 (7.1%)
 
 #### quotes > invalid
 
