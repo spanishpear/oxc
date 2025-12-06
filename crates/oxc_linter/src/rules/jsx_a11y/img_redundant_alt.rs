@@ -20,6 +20,7 @@ use crate::{
     },
 };
 
+// TODO: Update this diagnostic message to actually include the custom words from the config.
 fn img_redundant_alt_diagnostic(span: Span) -> OxcDiagnostic {
     OxcDiagnostic::warn("Redundant `alt` attribute.")
         .with_help("Provide no redundant alt text for image. Screen-readers already announce `img` tags as an image. You don't need to use the words `image`, `photo`, or `picture` (or any specified custom words) in the `alt` prop.").with_label(span)
@@ -60,6 +61,7 @@ impl ImgRedundantAltConfig {
     fn new(components: Vec<&str>, words: &[&str]) -> Self {
         Self {
             components: components.into_iter().map(Into::into).collect(),
+            // Using cow_to_ascii_lowercase means you cannot use non-ASCII characters (e.g. Japanese, Chinese, etc.). We should consider changing this?
             words: words
                 .iter()
                 .map(|w| Cow::Owned(w.cow_to_ascii_lowercase().to_string()))
@@ -268,6 +270,7 @@ fn test() {
         (r"<img alt='Photo of friend.' />;", None, None),
         (r"<img alt='Picture of friend.' />;", None, None),
         (r"<img alt='Image of friend.' />;", None, None),
+        (r"<img alt='thing not to say' />;", Some(serde_json::json!([{ "words": ["not to say"] }])), None),
         (r"<img alt='PhOtO of friend.' />;", None, None),
         (r"<img alt={'photo'} />;", None, None),
         (r"<img alt='piCTUre of friend.' />;", None, None),
@@ -290,6 +293,9 @@ fn test() {
         (r"<img alt='Word2' />;", Some(array()), None),
         (r"<Image alt='Word1' />;", Some(array()), None),
         (r"<Image alt='Word2' />;", Some(array()), None),
+        // non-english tests, they need to be enabled after we fix the code.
+        // (r"<img alt='イメージ' />", Some(serde_json::json!([{ "words": ["イメージ"] }])), None),
+        // (r"<img alt='イメージです' />", Some(serde_json::json!([{ "words": ["イメージ"] }])), None),
     ];
 
     Tester::new(ImgRedundantAlt::NAME, ImgRedundantAlt::PLUGIN, pass, fail).test_and_snapshot();
