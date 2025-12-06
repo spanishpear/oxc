@@ -11,7 +11,10 @@ type TestCases = RuleTester.TestCases;
 type ValidTestCase = RuleTester.ValidTestCase;
 type InvalidTestCase = RuleTester.InvalidTestCase;
 type TestCase = ValidTestCase | InvalidTestCase;
-type LanguageOptions = RuleTester.LanguageOptions;
+
+// Add undocumented `ignoreNonFatalErrors` property to `ParserOptions`
+type ParserOptions = RuleTester.ParserOptions & { ignoreNonFatalErrors?: boolean };
+type LanguageOptions = RuleTester.LanguageOptions & { parserOptions?: ParserOptions };
 
 // Set up `RuleTester` to use our hooks
 RuleTester.describe = describe;
@@ -116,13 +119,17 @@ function modifyConfigOrTestCase<T extends Config | TestCase>(value: T): T {
 
 /**
  * Modify language options.
- * Currently just duplicates `languageOptions` and doesn't modify it.
+ * Set parser options to ignore parsing errors. Some of ESLint's test cases contain invalid TS code.
  *
  * @param languageOptions - Language options
  * @returns Modified language options
  */
 function modifyLanguageOptions(languageOptions?: LanguageOptions | null): LanguageOptions {
   languageOptions = { ...languageOptions };
+
+  const parserOptions = { ...languageOptions.parserOptions, ignoreNonFatalErrors: true };
+  languageOptions.parserOptions = parserOptions;
+
   return languageOptions;
 }
 
