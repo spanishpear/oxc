@@ -213,7 +213,7 @@ impl ImgRedundantAlt {
 fn test() {
     use crate::tester::Tester;
 
-    fn array() -> serde_json::Value {
+    fn config_array() -> serde_json::Value {
         serde_json::json!([{
             "components": ["Image"],
             "words": ["Word1", "Word2"]
@@ -275,6 +275,17 @@ fn test() {
             Some(serde_json::json!([{ "words": ["not to say"] }])),
             None,
         ),
+        (
+            r"<PicVersionThree alt='this is a photo' />;",
+            Some(serde_json::json!([{ "components": ["PicVersionThree"] }])),
+            None,
+        ),
+        // TODO: if there is a period immediately after the banned word, it does not get recognized by the current logic.
+        // (
+        //     r"<PicVersionThree alt='this is a photo.' />;",
+        //     Some(serde_json::json!([{ "components": ["PicVersionThree"] }])),
+        //     None,
+        // ),
         (r"<img alt='PhOtO of friend.' />;", None, None),
         (r"<img alt={'photo'} />;", None, None),
         (r"<img alt='piCTUre of friend.' />;", None, None),
@@ -291,12 +302,13 @@ fn test() {
         (r"<img alt={`picture doing ${picture}`} {...this.props} />", None, None),
         (r"<img alt={`photo doing ${photo}`} {...this.props} />", None, None),
         (r"<img alt={`image doing ${image}`} {...this.props} />", None, None),
+        (r"<Image alt='Photo of a friend' />", Some(config_array()), None),
         (r"<Image alt='Photo of a friend' />", None, Some(settings())),
         // TESTS FOR ARRAY OPTION TESTS
-        (r"<img alt='Word1' />;", Some(array()), None),
-        (r"<img alt='Word2' />;", Some(array()), None),
-        (r"<Image alt='Word1' />;", Some(array()), None),
-        (r"<Image alt='Word2' />;", Some(array()), None),
+        (r"<img alt='Word1' />;", Some(config_array()), None),
+        (r"<img alt='Word2' />;", Some(config_array()), None),
+        (r"<Image alt='Word1' />;", Some(config_array()), None),
+        (r"<Image alt='Word2' />;", Some(config_array()), None),
         // non-english tests, they need to be enabled after we fix the code.
         // (r"<img alt='イメージ' />", Some(serde_json::json!([{ "words": ["イメージ"] }])), None),
         // (r"<img alt='イメージです' />", Some(serde_json::json!([{ "words": ["イメージ"] }])), None),
