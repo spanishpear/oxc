@@ -110,7 +110,20 @@ class RuleTesterShim extends RuleTester {
  */
 function modifyConfigOrTestCase<T extends Config | TestCase>(value: T): T {
   if ("eslintCompat" in value) throw new Error("Cannot set `eslintCompat` property");
-  return value;
+
+  return { ...value, languageOptions: modifyLanguageOptions(value.languageOptions) };
+}
+
+/**
+ * Modify language options.
+ * Currently just duplicates `languageOptions` and doesn't modify it.
+ *
+ * @param languageOptions - Language options
+ * @returns Modified language options
+ */
+function modifyLanguageOptions(languageOptions?: LanguageOptions | null): LanguageOptions {
+  languageOptions = { ...languageOptions };
+  return languageOptions;
 }
 
 export { RuleTesterShim as RuleTester };
