@@ -38,7 +38,7 @@ pub struct ExpectExpectConfig {
     ///
     /// NOTE: The default value is `["expect"]` for Jest and
     /// `["expect", "expectTypeOf", "assert", "assertType"]` for Vitest.
-    #[schemars(rename = "assertFunctionNames")]
+    #[serde(rename = "assertFunctionNames")]
     assert_function_names_jest: Vec<CompactStr>,
     #[schemars(skip)] // Skipped because this field isn't exposed to the user.
     assert_function_names_vitest: Vec<CompactStr>,
