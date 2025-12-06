@@ -1,6 +1,7 @@
 import assert from "node:assert";
 import { RuleTester } from "#oxlint";
 import { describe, it } from "./capture.ts";
+import { FILTER_CODE } from "./filter.ts";
 
 import type { Rule } from "#oxlint";
 
@@ -48,11 +49,27 @@ class RuleTesterShim extends RuleTester {
   }
 
   run(ruleName: string, rule: Rule, tests: TestCases): void {
-    for (const test of tests.valid.concat(tests.invalid)) {
-      if (typeof test === "string") continue;
+    let { valid, invalid } = tests;
 
-      assert(!("eslintCompat" in test), "Cannot set `eslintCompat` property of test case");
+    // Apply filter
+    if (FILTER_CODE !== null) {
+      valid = valid.filter((test) => {
+        const code = typeof test === "string" ? test : test.code;
+        return code === FILTER_CODE;
+      });
+      invalid = invalid.filter((test) => test.code === FILTER_CODE);
     }
+
+    // Prevent setting `eslintCompat` property
+    for (const test of valid) {
+      if (typeof test === "string") continue;
+      assert(!("eslintCompat" in test), "Cannot set `eslintCompat` property of test");
+    }
+    for (const test of invalid) {
+      assert(!("eslintCompat" in test), "Cannot set `eslintCompat` property of test");
+    }
+
+    tests = { ...tests, valid, invalid };
 
     super.run(ruleName, rule, tests);
   }

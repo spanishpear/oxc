@@ -3,6 +3,7 @@ import { basename, join as pathJoin } from "node:path";
 import { fileURLToPath } from "node:url";
 import Module from "node:module";
 import { setCurrentRule, resetCurrentRule } from "./capture.ts";
+import { FILTER_RULE } from "./filter.ts";
 
 import type { RuleResult } from "./capture.ts";
 
@@ -51,11 +52,16 @@ export function runAllTests(): RuleResult[] {
  * Find all ESLint rule test files.
  */
 function findTestFiles(): string[] {
-  const files = fs.readdirSync(ESLINT_RULES_TESTS_DIR_PATH);
-  return files
-    .filter((f) => f.endsWith(".js") && !f.startsWith("_"))
-    .map((f) => pathJoin(ESLINT_RULES_TESTS_DIR_PATH, f))
-    .sort();
+  let files = fs.readdirSync(ESLINT_RULES_TESTS_DIR_PATH);
+
+  files = files.filter((filename) => filename.endsWith(".js") && !filename.startsWith("_"));
+
+  if (FILTER_RULE !== null) {
+    const filterFilename = `${FILTER_RULE}.js`;
+    files = files.filter((filename) => filename === filterFilename);
+  }
+
+  return files.map((filename) => pathJoin(ESLINT_RULES_TESTS_DIR_PATH, filename)).sort();
 }
 
 /**
