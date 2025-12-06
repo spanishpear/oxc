@@ -270,7 +270,11 @@ fn test() {
         (r"<img alt='Photo of friend.' />;", None, None),
         (r"<img alt='Picture of friend.' />;", None, None),
         (r"<img alt='Image of friend.' />;", None, None),
-        (r"<img alt='thing not to say' />;", Some(serde_json::json!([{ "words": ["not to say"] }])), None),
+        (
+            r"<img alt='thing not to say' />;",
+            Some(serde_json::json!([{ "words": ["not to say"] }])),
+            None,
+        ),
         (r"<img alt='PhOtO of friend.' />;", None, None),
         (r"<img alt={'photo'} />;", None, None),
         (r"<img alt='piCTUre of friend.' />;", None, None),
