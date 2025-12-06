@@ -1,6 +1,8 @@
+import { createRequire } from "node:module";
 import { RuleTester } from "#oxlint";
 import { describe, it } from "./capture.ts";
 import { FILTER_CODE } from "./filter.ts";
+import { ESLINT_RULES_TESTS_DIR_PATH } from "./run.ts";
 
 import type { Rule } from "#oxlint";
 
@@ -16,6 +18,11 @@ type TestCase = ValidTestCase | InvalidTestCase;
 type ParserOptions = RuleTester.ParserOptions & { ignoreNonFatalErrors?: boolean };
 type LanguageOptions = RuleTester.LanguageOptions & { parserOptions?: ParserOptions };
 
+// Get `@typescript-eslint/parser` module.
+// Load the instance which would be loaded by files in ESLint's `tests/lib/rules` directory.
+const require = createRequire(ESLINT_RULES_TESTS_DIR_PATH);
+const tsEslintParser = require("@typescript-eslint/parser");
+
 // Set up `RuleTester` to use our hooks
 RuleTester.describe = describe;
 RuleTester.it = it;
@@ -29,7 +36,8 @@ RuleTester.setDefaultConfig({ ...DEFAULT_SHARED_CONFIG });
  * Prevents disabling ESLint compatibility mode or overriding `describe` and `it` properties.
  */
 class RuleTesterShim extends RuleTester {
-  // Prevent setting `eslintCompat` property
+  // Prevent setting `eslintCompat` property.
+  // Replace TS-ESLint parser with parser options in `languageOptions`.
 
   constructor(config?: Config) {
     if (config != null) config = modifyConfigOrTestCase(config);
@@ -107,6 +115,7 @@ class RuleTesterShim extends RuleTester {
  * Modify config or test case.
  *
  * Throw error if has `eslintCompat` property.
+ * If specifies `@typescript-eslint/parser` as parser in `languageOptions`, set `lang` parsing option instead.
  *
  * @param test - Test case
  * @returns Modified test case
@@ -120,6 +129,7 @@ function modifyConfigOrTestCase<T extends Config | TestCase>(value: T): T {
 /**
  * Modify language options.
  * Set parser options to ignore parsing errors. Some of ESLint's test cases contain invalid TS code.
+ * If they specify TS-ESLint as parser, set `lang` parsing option instead.
  *
  * @param languageOptions - Language options
  * @returns Modified language options
@@ -129,6 +139,16 @@ function modifyLanguageOptions(languageOptions?: LanguageOptions | null): Langua
 
   const parserOptions = { ...languageOptions.parserOptions, ignoreNonFatalErrors: true };
   languageOptions.parserOptions = parserOptions;
+
+  if (languageOptions.parser === tsEslintParser) {
+    delete languageOptions.parser;
+
+    if (parserOptions.ecmaFeatures?.jsx === true) {
+      parserOptions.lang = "tsx";
+    } else {
+      parserOptions.lang = "ts";
+    }
+  }
 
   return languageOptions;
 }

@@ -7,8 +7,8 @@
 | Status            | Count |
 |-------------------|-------|
 | Total rules       |   292 |
-| Fully passing     |   168 |
-| Partially passing |   119 |
+| Fully passing     |   169 |
+| Partially passing |   118 |
 | Fully failing     |     5 |
 | Load errors       |     0 |
 | No tests run      |     0 |
@@ -18,8 +18,8 @@
 | Status      | Count |
 |-------------|-------|
 | Total tests | 33090 |
-| Passing     | 26759 |
-| Failing     |  6331 |
+| Passing     | 26892 |
+| Failing     |  6198 |
 
 ## Fully Passing Rules
 
@@ -80,6 +80,7 @@
 - `no-delete-var` (2 tests)
 - `no-div-regex` (3 tests)
 - `no-dupe-args` (13 tests)
+- `no-dupe-class-members` (78 tests)
 - `no-dupe-else-if` (89 tests)
 - `no-dupe-keys` (50 tests)
 - `no-duplicate-case` (29 tests)
@@ -196,8 +197,8 @@
 
 ### `accessor-pairs`
 
-Pass: 277 / 302 (91.7%)
-Fail: 25 / 302 (8.3%)
+Pass: 279 / 302 (92.4%)
+Fail: 23 / 302 (7.6%)
 
 #### accessor-pairs > invalid
 
@@ -270,32 +271,6 @@ AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
     at assertInvalidTestCaseMessageIsCorrect (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### accessor-pairs > valid
-
-```js
-interface I { get prop(): any }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### accessor-pairs > valid
-
-```js
-type T = { set prop(value: any): void }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### accessor-pairs > valid
@@ -8273,8 +8248,8 @@ TypeError: Cannot read properties of null (reading 'isConstructor')
 
 ### `default-param-last`
 
-Pass: 29 / 96 (30.2%)
-Fail: 67 / 96 (69.8%)
+Pass: 65 / 96 (67.7%)
+Fail: 31 / 96 (32.3%)
 
 #### default-param-last > invalid
 
@@ -8296,534 +8271,6 @@ AssertionError [ERR_ASSERTION]: Actual error location does not match expected er
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a?: number) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number, b: number) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number, b: number, c?: number) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number, b = 1) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number, b = 1, c = 1) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number, b = 1, c?: number) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number, b?: number, c = 1) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-function foo(a: number, b = 1, ...c) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a?: number) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number, b: number) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number, b: number, c?: number) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number, b = 1) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number, b = 1, c = 1) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number, b = 1, c?: number) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number, b?: number, c = 1) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = function (a: number, b = 1, ...c) {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a?: number) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number, b: number) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number, b: number, c?: number) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number, b = 1) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number, b = 1, c = 1) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number, b = 1, c?: number) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number, b?: number, c = 1) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-const foo = (a: number, b = 1, ...c) => {};
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(a: number, b: number, c: number) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(a: number, b?: number, c = 1) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(a: number, b = 1, c?: number) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(
-        public a: number,
-        protected b: number,
-        private c: number,
-      ) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(
-        public a: number,
-        protected b?: number,
-        private c = 10,
-      ) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(
-        public a: number,
-        protected b = 10,
-        private c?: number,
-      ) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(
-        a: number,
-        protected b?: number,
-        private c = 0,
-      ) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(
-        a: number,
-        b?: number,
-        private c = 0,
-      ) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### default-param-last > valid
-
-```js
-
-    class Foo {
-      constructor(
-        a: number,
-        private b?: number,
-        c = 0,
-      ) {}
-    }
-        
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### default-param-last > invalid
@@ -9746,8 +9193,8 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
 
 ### `func-style`
 
-Pass: 59 / 120 (49.2%)
-Fail: 61 / 120 (50.8%)
+Pass: 63 / 120 (52.5%)
+Fail: 57 / 120 (47.5%)
 
 #### func-style > valid
 
@@ -10172,95 +9619,12 @@ Error: Parsing failed
 
 ```js
 
-\u0009\u0009function test(a: string): string;
-\u0009\u0009function test(a: number): number;
-\u0009\u0009function test(a: unknown) {
-\u0009\u0009  return a;
-\u0009\u0009}
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### func-style > valid
-
-```js
-
-\u0009\u0009export function test(a: string): string;
-\u0009\u0009export function test(a: number): number;
-\u0009\u0009export function test(a: unknown) {
-\u0009\u0009  return a;
-\u0009\u0009}
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### func-style > valid
-
-```js
-
 \u0009\u0009\u0009export function test(a: string): string;
 \u0009\u0009    export function test(a: number): number;
 \u0009\u0009    export function test(a: unknown) {
 \u0009\u0009      return a;
 \u0009\u0009    }
 \u0009\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### func-style > valid
-
-```js
-
-\u0009\u0009switch ($0) {
-\u0009\u0009\u0009case $1:
-\u0009\u0009\u0009function test(a: string): string;
-\u0009\u0009\u0009function test(a: number): number;
-\u0009\u0009\u0009function test(a: unknown) {
-\u0009\u0009\u0009return a;
-\u0009\u0009\u0009}
-\u0009\u0009}
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### func-style > valid
-
-```js
-
-\u0009\u0009switch ($0) {
-\u0009\u0009\u0009case $1:
-\u0009\u0009\u0009function test(a: string): string;
-\u0009\u0009\u0009break;
-\u0009\u0009\u0009case $2:
-\u0009\u0009\u0009function test(a: unknown) {
-\u0009\u0009\u0009return a;
-\u0009\u0009\u0009}
-\u0009\u0009}
-\u0009\u0009
 ```
 
 Error: Parsing failed
@@ -11238,34 +10602,8 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
 
 ### `grouped-accessor-pairs`
 
-Pass: 136 / 150 (90.7%)
-Fail: 14 / 150 (9.3%)
-
-#### grouped-accessor-pairs > valid
-
-```js
-interface I { get prop(): any, between: true, set prop(value: any): void }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### grouped-accessor-pairs > valid
-
-```js
-type T = { get prop(): any, between: true, set prop(value: any): void }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 138 / 150 (92.0%)
+Fail: 12 / 150 (8.0%)
 
 #### grouped-accessor-pairs > valid
 
@@ -57745,8 +57083,8 @@ AssertionError [ERR_ASSERTION]: Should have 4 errors but had 3: [
 
 ### `init-declarations`
 
-Pass: 47 / 81 (58.0%)
-Fail: 34 / 81 (42.0%)
+Pass: 52 / 81 (64.2%)
+Fail: 29 / 81 (35.8%)
 
 #### init-declarations > valid
 
@@ -57836,38 +57174,6 @@ Error: Parsing failed
 \u0009\u0009color?: string;
 \u0009  }
 \u0009\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### init-declarations > valid
-
-```js
-
-\u0009  interface GreetingSettings {
-\u0009\u0009greeting: string;
-\u0009\u0009duration?: number;
-\u0009\u0009color?: string;
-\u0009  }
-\u0009\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### init-declarations > valid
-
-```js
-type GreetingLike = string | (() => string) | Greeter;
 ```
 
 Error: Parsing failed
@@ -57985,64 +57291,8 @@ Error: Parsing failed
 ```js
 
 \u0009  const class1 = class NAME {
-\u0009\u0009constructor() {
-\u0009\u0009  var name1: string = 'hello';
-\u0009\u0009}
-\u0009  };
-\u0009\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### init-declarations > valid
-
-```js
-
-\u0009  const class1 = class NAME {
 \u0009\u0009static pi: number = 3.14;
 \u0009  };
-\u0009\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### init-declarations > valid
-
-```js
-
-\u0009  const class1 = class NAME {
-\u0009\u0009static pi: number = 3.14;
-\u0009  };
-\u0009\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### init-declarations > valid
-
-```js
-
-\u0009  interface IEmployee {
-\u0009\u0009empCode: number;
-\u0009\u0009empName: string;
-\u0009\u0009getSalary: (number) => number; // arrow function
-\u0009\u0009getManagerName(number): string;
-\u0009  }
 \u0009\u0009\u0009
 ```
 
@@ -59206,42 +58456,8 @@ TypeError: Cannot convert object to primitive value
 
 ### `max-params`
 
-Pass: 26 / 45 (57.8%)
-Fail: 19 / 45 (42.2%)
-
-#### max-params > valid
-
-```js
-
-  class Foo {
-\u0009method(this: void, a, b, c) {}
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### max-params > valid
-
-```js
-
-  class Foo {
-\u0009method(this: Foo, a, b) {}
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 28 / 45 (62.2%)
+Fail: 17 / 45 (37.8%)
 
 #### max-params > valid
 
@@ -60128,8 +59344,8 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
 
 ### `no-array-constructor`
 
-Pass: 127 / 146 (87.0%)
-Fail: 19 / 146 (13.0%)
+Pass: 132 / 146 (90.4%)
+Fail: 14 / 146 (9.6%)
 
 #### no-array-constructor > valid
 
@@ -60158,87 +59374,6 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
     at assertValidTestCasePasses (apps/oxlint/dist/index.js)
     at runValidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### no-array-constructor > valid
-
-```js
-new Array<Foo>(1, 2, 3);
-```
-
-AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
-  {
-    ruleId: 'rule-to-test/no-array-constructor',
-    message: 'The array literal notation [] is preferable.',
-    messageId: 'preferLiteral',
-    severity: 1,
-    nodeType: 'NewExpression',
-    line: 1,
-    column: 0,
-    endLine: 1,
-    endColumn: 9,
-    suggestions: null
-  }
-]
-
-1 !== 0
-
-    at assertErrorCountIsCorrect (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-    at apps/oxlint/dist/index.js
-
-
-#### no-array-constructor > valid
-
-```js
-new Array<Foo>();
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-array-constructor > valid
-
-```js
-Array<Foo>();
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-array-constructor > valid
-
-```js
-Array?.<Foo>(1, 2, 3);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-array-constructor > valid
-
-```js
-Array?.<Foo>();
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### no-array-constructor > invalid
@@ -61388,185 +60523,10 @@ TypeError: Cannot read properties of undefined (reading 'parent')
     at walkNode (apps/oxlint/dist/lint.js)
 
 
-### `no-dupe-class-members`
-
-Pass: 77 / 78 (98.7%)
-Fail: 1 / 78 (1.3%)
-
-#### no-dupe-class-members > valid
-
-```js
-
-\u0009\u0009class Foo {
-\u0009\u0009  foo(a: string): string;
-\u0009\u0009  foo(a: number): number;
-\u0009\u0009  foo(a: any): any {}
-\u0009\u0009}
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
 ### `no-duplicate-imports`
 
-Pass: 34 / 85 (40.0%)
-Fail: 51 / 85 (60.0%)
-
-#### no-duplicate-imports > valid
-
-```js
-import type { Os } from "os";
-import type { Fs } from "fs";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import { type Os } from "os";
-import type { Fs } from "fs";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import type { Merge } from "lodash-es";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import _, { type Merge } from "lodash-es";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import type * as Foobar from "async";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import type Os from "os";
-export type { Something } from "os";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import type Os from "os";
-export { type Something } from "os";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import type * as Bar from "os";
-import { type Baz } from "os";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import foo, * as bar from "os";
-import { type Baz } from "os";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import foo, { type bar } from "os";
-import type * as Baz from "os";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-duplicate-imports > valid
-
-```js
-import type { Merge } from "lodash-es";
-import type _ from "lodash-es";
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 45 / 85 (52.9%)
+Fail: 40 / 85 (47.1%)
 
 #### no-duplicate-imports > valid
 
@@ -90066,11 +89026,11 @@ TypeError: Cannot read properties of undefined (reading 'init')
         
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+TypeError: Cannot read properties of undefined (reading 'init')
+    at stack.getCurrent (apps/oxlint/conformance/submodules/eslint/lib/rules/no-invalid-this.js:85:17)
+    at ThisExpression (apps/oxlint/conformance/submodules/eslint/lib/rules/no-invalid-this.js:167:27)
+    at apps/oxlint/dist/lint.js
+    at walkThisExpression (apps/oxlint/dist/lint.js)
 
 
 #### no-invalid-this > valid
@@ -90086,11 +89046,11 @@ Error: Parsing failed
         
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+TypeError: Cannot read properties of undefined (reading 'init')
+    at stack.getCurrent (apps/oxlint/conformance/submodules/eslint/lib/rules/no-invalid-this.js:85:17)
+    at ThisExpression (apps/oxlint/conformance/submodules/eslint/lib/rules/no-invalid-this.js:167:27)
+    at apps/oxlint/dist/lint.js
+    at walkThisExpression (apps/oxlint/dist/lint.js)
 
 
 #### no-invalid-this > valid
@@ -90103,11 +89063,11 @@ Error: Parsing failed
         
 ```
 
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
+TypeError: Cannot read properties of undefined (reading 'init')
+    at stack.getCurrent (apps/oxlint/conformance/submodules/eslint/lib/rules/no-invalid-this.js:85:17)
+    at ThisExpression (apps/oxlint/conformance/submodules/eslint/lib/rules/no-invalid-this.js:167:27)
+    at apps/oxlint/dist/lint.js
+    at walkThisExpression (apps/oxlint/dist/lint.js)
 
 
 #### no-invalid-this > valid
@@ -92299,26 +91259,8 @@ AssertionError [ERR_ASSERTION]: messageId 'redundantNestedBlock' does not match 
 
 ### `no-loop-func`
 
-Pass: 86 / 96 (89.6%)
-Fail: 10 / 96 (10.4%)
-
-#### no-loop-func > valid
-
-```js
-
-  let someArray: MyType[] = [];
-  for (let i = 0; i < 10; i += 1) {
-\u0009someArray = someArray.filter((item: MyType) => !!item);
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 89 / 96 (92.7%)
+Fail: 7 / 96 (7.3%)
 
 #### no-loop-func > valid
 
@@ -92347,47 +91289,6 @@ Error: Parsing failed
 \u0009someArray = someArray.filter((item: MyType) => !!item);
   }
 \u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-loop-func > valid
-
-```js
-
-  type MyType = 1;
-  let someArray: MyType[] = [];
-  for (let i = 0; i < 10; i += 1) {
-\u0009someArray = someArray.filter((item: MyType) => !!item);
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-loop-func > valid
-
-```js
-
-    // UnconfiguredGlobalType is not defined anywhere or configured in globals
-    for (var i = 0; i < 10; i++) {
-      const process = (item: UnconfiguredGlobalType) => {
-        // This is valid because the type reference is considered safe
-        // even though UnconfiguredGlobalType is not configured
-        return item.id;
-      };
-    }
-    
 ```
 
 Error: Parsing failed
@@ -92514,34 +91415,8 @@ Error: Parsing failed
 
 ### `no-magic-numbers`
 
-Pass: 126 / 205 (61.5%)
-Fail: 79 / 205 (38.5%)
-
-#### no-magic-numbers > valid
-
-```js
-type Foo = 'bar';
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-magic-numbers > valid
-
-```js
-type Foo = true;
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 128 / 205 (62.4%)
+Fail: 77 / 205 (37.6%)
 
 #### no-magic-numbers > valid
 
@@ -98344,8 +97219,8 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
 
 ### `no-shadow`
 
-Pass: 201 / 308 (65.3%)
-Fail: 107 / 308 (34.7%)
+Pass: 230 / 308 (74.7%)
+Fail: 78 / 308 (25.3%)
 
 #### no-shadow > valid
 
@@ -98427,306 +97302,6 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
 #### no-shadow > valid
 
 ```js
-function foo<T = (arg: any) => any>(arg: T) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T = ([arg]: [any]) => any>(arg: T) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T = ({ args }: { args: any }) => any>(arg: T) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T = (...args: any[]) => any>(fn: T, args: any[]) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T extends (...args: any[]) => any>(fn: T, args: any[]) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T extends (...args: any[]) => any>(fn: T, ...args: any[]) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T extends ([args]: any[]) => any>(fn: T, args: any[]) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T extends ([...args]: any[]) => any>(fn: T, args: any[]) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-function foo<T extends ({ args }: { args: any }) => any>(fn: T, args: any) {}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  function foo<T extends (id: string, ...args: any[]) => any>(
-\u0009fn: T,
-\u0009...args: any[]
-  ) {}
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  type Args = 1;
-  function foo<T extends (Args: any) => void>(arg: T) {}
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  export type ArrayInput<Func> = Func extends (arg0: Array<infer T>) => any
-\u0009? T[]
-\u0009: Func extends (...args: infer T) => any
-\u0009  ? T
-\u0009  : never;
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  function test(this: Foo) {
-\u0009function test2(this: Bar) {}
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  class Foo {
-\u0009prop = 1;
-  }
-  namespace Foo {
-\u0009export const v = 2;
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  function Foo() {}
-  namespace Foo {
-\u0009export const v = 2;
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  class Foo {
-\u0009prop = 1;
-  }
-  interface Foo {
-\u0009prop2: string;
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  import type { Foo } from 'bar';
-  
-  declare module 'bar' {
-\u0009export interface Foo {
-\u0009  x: string;
-\u0009}
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  const x = 1;
-  type x = string;
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  const x = 1;
-  {
-\u0009type x = string;
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
 
   type Foo = 1;
 \u0009\u0009
@@ -98745,24 +97320,6 @@ Error: Parsing failed
 
   type Foo = 1;
 \u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  enum Direction {
-\u0009left = 'left',
-\u0009right = 'right',
-  }
-\u0009  
 ```
 
 Error: Parsing failed
@@ -98971,28 +97528,6 @@ Error: Parsing failed
 
 ```js
 
-\u0009\u0009declare global {
-\u0009\u0009  const a: string;
-  
-\u0009\u0009  namespace Foo {
-\u0009\u0009\u0009const a: number;
-\u0009\u0009  }
-\u0009\u0009}
-\u0009\u0009export {};
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
 \u0009\u0009  declare global {
 \u0009\u0009\u0009type A = 'foo';
   
@@ -99021,54 +97556,6 @@ Error: Parsing failed
 \u0009\u0009  }
 \u0009\u0009  export {};
 \u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  export class Wrapper<Wrapped> {
-\u0009private constructor(private readonly wrapped: Wrapped) {}
-  
-\u0009unwrap(): Wrapped {
-\u0009  return this.wrapped;
-\u0009}
-  
-\u0009static create<Wrapped>(wrapped: Wrapped) {
-\u0009  return new Wrapper<Wrapped>(wrapped);
-\u0009}
-  }
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  function makeA() {
-\u0009return class A<T> {
-\u0009  constructor(public value: T) {}
-  
-\u0009  static make<T>(value: T) {
-\u0009\u0009return new A<T>(value);
-\u0009  }
-\u0009};
-  }
-\u0009  
 ```
 
 Error: Parsing failed
@@ -99306,126 +97793,6 @@ Error: Parsing failed
 \u0009interface Foo<A> {}
   }
   type A = 1;
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  import type { Foo } from 'bar';
-  
-  declare module 'bar' {
-\u0009export type Foo = string;
-  }
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  import type { Foo } from 'bar';
-  
-  declare module 'bar' {
-\u0009interface Foo {
-\u0009  x: string;
-\u0009}
-  }
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  import { type Foo } from 'bar';
-  
-  declare module 'bar' {
-\u0009export type Foo = string;
-  }
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  import { type Foo } from 'bar';
-  
-  declare module 'bar' {
-\u0009export interface Foo {
-\u0009  x: string;
-\u0009}
-  }
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  import { type Foo } from 'bar';
-  
-  declare module 'bar' {
-\u0009type Foo = string;
-  }
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-shadow > valid
-
-```js
-
-  import { type Foo } from 'bar';
-  
-  declare module 'bar' {
-\u0009interface Foo {
-\u0009  x: string;
-\u0009}
-  }
 \u0009\u0009
 ```
 
@@ -101040,69 +99407,8 @@ AssertionError [ERR_ASSERTION]: Should have no errors but had 1: [
 
 ### `no-unassigned-vars`
 
-Pass: 15 / 23 (65.2%)
-Fail: 8 / 23 (34.8%)
-
-#### no-unassigned-vars > valid
-
-```js
-let z: number | undefined = undefined; log(z);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unassigned-vars > valid
-
-```js
-declare let c: string | undefined; log(c);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unassigned-vars > valid
-
-```js
-\u0009\u0009\u0009const foo = (two: string): void => {
-\u0009\u0009\u0009\u0009let one: string | undefined;
-\u0009\u0009\u0009\u0009if (one !== two) {
-\u0009\u0009\u0009\u0009\u0009one = two;
-\u0009\u0009\u0009\u0009}
-\u0009\u0009\u0009}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unassigned-vars > valid
-
-```js
-\u0009\u0009\u0009declare module 'module' {
-\u0009\u0009\u0009\u0009import type { T } from 'module';
-\u0009\u0009\u0009\u0009let x: T;
-\u0009\u0009\u0009\u0009export = x;
-\u0009\u0009\u0009}
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 19 / 23 (82.6%)
+Fail: 4 / 23 (17.4%)
 
 #### no-unassigned-vars > invalid
 
@@ -116951,8 +115257,8 @@ AssertionError [ERR_ASSERTION]: Should have 2 errors but had 1: [
 
 ### `no-unused-expressions`
 
-Pass: 106 / 124 (85.5%)
-Fail: 18 / 124 (14.5%)
+Pass: 109 / 124 (87.9%)
+Fail: 15 / 124 (12.1%)
 
 #### no-unused-expressions > invalid
 
@@ -117016,59 +115322,6 @@ AssertionError [ERR_ASSERTION]: Should have 2 errors but had 0: []
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### no-unused-expressions > valid
-
-```js
-
-\u0009\u0009module Foo {
-\u0009\u0009  'use strict';
-\u0009\u0009}
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > valid
-
-```js
-
-\u0009\u0009namespace Foo {
-\u0009\u0009  'use strict';
-  
-\u0009\u0009  export class Foo {}
-\u0009\u0009  export class Bar {}
-\u0009\u0009}
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-unused-expressions > valid
-
-```js
-
-\u0009\u0009class Foo<T> {}
-\u0009\u0009new Foo<string>();
-\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### no-unused-expressions > valid
@@ -118509,8 +116762,8 @@ AssertionError [ERR_ASSERTION]: Hydrated message "'b' is defined but never used.
 
 ### `no-use-before-define`
 
-Pass: 310 / 347 (89.3%)
-Fail: 37 / 347 (10.7%)
+Pass: 321 / 347 (92.5%)
+Fail: 26 / 347 (7.5%)
 
 #### no-use-before-define > invalid
 
@@ -118526,84 +116779,6 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
     at apps/oxlint/dist/index.js
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009type foo = 1;
-\u0009const x: foo = 1;
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009type foo = 1;
-\u0009type bar = foo;
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009interface Foo {}
-\u0009const x: Foo = {};
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-declare function a();
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009declare class a {
-\u0009  foo();
-\u0009}
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### no-use-before-define > valid
@@ -118748,43 +116923,6 @@ Error: Parsing failed
 
 ```js
 
-\u0009function test(file: Blob) {
-\u0009  const slice: typeof file.slice =
-\u0009\u0009file.slice || (file as any).webkitSlice || (file as any).mozSlice;
-\u0009  return slice;
-\u0009}
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009interface Foo {
-\u0009  bar: string;
-\u0009}
-\u0009const bar = 'blah';
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
 \u0009function foo(): Foo {
 \u0009  return Foo.FOO;
 \u0009}
@@ -118908,44 +117046,6 @@ Error: Parsing failed
 
 ```js
 
-\u0009type T = (value: unknown) => value is Id;
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009global.foo = true;
-\u0009
-\u0009declare global {
-\u0009  namespace NodeJS {
-\u0009\u0009interface Global {
-\u0009\u0009  foo?: boolean;
-\u0009\u0009}
-\u0009  }
-\u0009}
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
 \u0009const foo = {
 \u0009  bar: 'bar',
 \u0009} satisfies {
@@ -118954,50 +117054,6 @@ Error: Parsing failed
 \u0009
 \u0009const baz = '';
 \u0009\u0009  
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009namespace A.X.Y {}
-\u0009
-\u0009import Z = A.X.Y;
-\u0009
-\u0009const X = 23;
-\u0009\u0009
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-use-before-define > valid
-
-```js
-
-\u0009\u0009namespace A {
-\u0009\u0009\u0009export namespace X {
-\u0009\u0009\u0009\u0009export namespace Y {
-\u0009\u0009\u0009\u0009\u0009export const foo = 40;
-\u0009\u0009\u0009\u0009}
-\u0009\u0009\u0009}
-\u0009\u0009}
-
-\u0009\u0009import Z = A.X.Y;
-
-\u0009\u0009const X = 23;
-\u0009\u0009
 ```
 
 Error: Parsing failed
@@ -120987,187 +119043,13 @@ AssertionError [ERR_ASSERTION]: Actual error location does not match expected er
 
 ### `no-useless-constructor`
 
-Pass: 38 / 49 (77.6%)
-Fail: 11 / 49 (22.4%)
+Pass: 48 / 49 (98.0%)
+Fail: 1 / 49 (2.0%)
 
 #### no-useless-constructor > valid
 
 ```js
 declare class A { constructor(options: any); }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      declare class A {
-        constructor();
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A {
-        constructor();
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      abstract class A {
-        constructor();
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A {
-        constructor(private name: string) {}
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A {
-        constructor(public name: string) {}
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A {
-        constructor(protected name: string) {}
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A {
-        constructor(foo);
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A {
-        constructor(@Foo foo: string) {}
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A extends Object {
-        constructor(@Foo foo: string) {
-          super(foo);
-        }
-      }
-          
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-useless-constructor > valid
-
-```js
-
-      class A extends Object {
-        constructor(foo: string, @Bar() bar) {
-          super(foo, bar);
-        }
-      }
-          
 ```
 
 Error: Parsing failed
@@ -122134,8 +120016,8 @@ TypeError: Cannot read properties of null (reading 'currentSegments')
 
 ### `no-var`
 
-Pass: 48 / 52 (92.3%)
-Fail: 4 / 52 (7.7%)
+Pass: 49 / 52 (94.2%)
+Fail: 3 / 52 (5.8%)
 
 #### no-var > invalid
 
@@ -122148,19 +120030,6 @@ Error: Parsing failed
     at lint (apps/oxlint/dist/index.js)
     at assertInvalidTestCasePasses (apps/oxlint/dist/index.js)
     at runInvalidTestCase (apps/oxlint/dist/index.js)
-
-
-#### no-var > valid
-
-```js
-declare global { var bar: 'car' }
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
 
 
 #### no-var > invalid
@@ -127379,39 +125248,13 @@ AssertionError [ERR_ASSERTION]: Should have 1 error but had 0: []
 
 ### `prefer-arrow-callback`
 
-Pass: 90 / 107 (84.1%)
-Fail: 17 / 107 (15.9%)
-
-#### prefer-arrow-callback > valid
-
-```js
-foo((a:string) => a);
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
+Pass: 92 / 107 (86.0%)
+Fail: 15 / 107 (14.0%)
 
 #### prefer-arrow-callback > valid
 
 ```js
 foo(function bar(a:string) {});
-```
-
-Error: Parsing failed
-    at parse (apps/oxlint/dist/index.js)
-    at lint (apps/oxlint/dist/index.js)
-    at assertValidTestCasePasses (apps/oxlint/dist/index.js)
-    at runValidTestCase (apps/oxlint/dist/index.js)
-
-
-#### prefer-arrow-callback > valid
-
-```js
-test('clean', function (this: any) { this.foo = 'Cleaned!';});
 ```
 
 Error: Parsing failed
