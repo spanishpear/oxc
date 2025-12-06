@@ -161,6 +161,17 @@ interface ParserOptions {
 }
 
 /**
+ * Parser options config, including internal options which are only available in debug build.
+ * This type is not externally exposed.
+ */
+interface ParserInternalOptions extends ParserOptions {
+  /**
+   * `true` to ignore non-fatal parsing errors.
+   */
+  ignoreNonFatalErrors?: boolean;
+}
+
+/**
  * ECMA features config.
  */
 interface EcmaFeatures {
@@ -798,7 +809,7 @@ function lint(test: TestCase, plugin: Plugin, config: Config): Diagnostic[] {
       parseOptions.sourceType = sourceType;
     }
 
-    const { parserOptions } = languageOptions;
+    const parserOptions = languageOptions.parserOptions as ParserInternalOptions | undefined;
     if (parserOptions != null) {
       const { lang } = parserOptions;
       if (lang != null) {
@@ -807,6 +818,11 @@ function lint(test: TestCase, plugin: Plugin, config: Config): Diagnostic[] {
       } else if (parserOptions.ecmaFeatures?.jsx === true) {
         parseOptions.lang = "jsx";
         ext = "jsx";
+      }
+
+      // `ignoreNonFatalErrors` option is just for conformance tests, so only include this code in debug build
+      if (DEBUG && parserOptions.ignoreNonFatalErrors === true) {
+        parseOptions.ignoreNonFatalErrors = true;
       }
     }
   }
