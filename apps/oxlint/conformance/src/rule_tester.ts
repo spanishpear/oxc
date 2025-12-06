@@ -2,9 +2,12 @@ import assert from "node:assert";
 import { RuleTester } from "#oxlint";
 import { describe, it } from "./capture.ts";
 
+import type { Rule } from "#oxlint";
+
 type Config = RuleTester.Config;
 type DescribeFn = RuleTester.DescribeFn;
 type ItFn = RuleTester.ItFn;
+type TestCases = RuleTester.TestCases;
 
 // Set up `RuleTester` to use our hooks
 RuleTester.describe = describe;
@@ -44,7 +47,15 @@ class RuleTesterShim extends RuleTester {
     super.setDefaultConfig({ ...DEFAULT_SHARED_CONFIG });
   }
 
-  // TODO: Really should override `run` to prevent `eslintCompat: true` from being set on any rule case
+  run(ruleName: string, rule: Rule, tests: TestCases): void {
+    for (const test of tests.valid.concat(tests.invalid)) {
+      if (typeof test === "string") continue;
+
+      assert(!("eslintCompat" in test), "Cannot set `eslintCompat` property of test case");
+    }
+
+    super.run(ruleName, rule, tests);
+  }
 
   // Prevent changing `describe` or `it` properties
 
