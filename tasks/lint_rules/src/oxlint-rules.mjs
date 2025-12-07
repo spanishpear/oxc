@@ -167,8 +167,8 @@ const NOT_SUPPORTED_RULE_NAMES = new Set([
   "react/jsx-space-before-closing",
 
   // Deprecated typescript-eslint rules:
-  "typescript/sort-type-constituents", // Replaced by `perfectionist/sort-intersection-types` and `perfectionist/sort-union-types` rules.
-  "typescript/no-type-alias", // Replaced by `typescript-eslint/consistent-type-definitions` rule.
+  "typescript/sort-type-constituents", // replaced by `perfectionist/sort-intersection-types` and `perfectionist/sort-union-types` rules.
+  "typescript/no-type-alias", // replaced by `typescript-eslint/consistent-type-definitions` rule.
   "typescript/typedef", // just generally deprecated
 
   // The following ESLint rules are deprecated in the main package, and are all stylistic:
