@@ -138,6 +138,9 @@ const NOT_SUPPORTED_RULE_NAMES = new Set([
   "vitest/no-done-callback", // [deprecated in eslint-plugin-vitest](https://github.com/vitest-dev/eslint-plugin-vitest/issues/158)
   "eslint/no-return-await", // deprecated, not recommended anymore by ESLint
   "eslint/prefer-reflect", // deprecated, not recommended anymore by ESLint
+  "jsx-a11y/accessible-emoji", // deprecated
+  "jsx-a11y/label-has-for", // deprecated, replaced by jsx-a11y/label-has-associated-control
+  "jsx-a11y/no-onchange", // deprecated, based on behavior of very old browsers, and so no longer necessary
 
   // ESLint rules that are deprecated in ESLint and replaced by rules in eslint-plugin-n:
   "eslint/no-process-env", // replaced by node/no-process-env, which we already support
