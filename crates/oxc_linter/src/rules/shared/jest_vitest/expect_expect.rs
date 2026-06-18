@@ -4,7 +4,7 @@ use schemars::JsonSchema;
 
 use oxc_ast::{
     AstKind,
-    ast::{CallExpression, Expression, FormalParameter, Function, Statement},
+    ast::{Expression, FormalParameter, Function, Statement},
 };
 use oxc_ast_visit::{Visit, walk};
 use oxc_diagnostics::OxcDiagnostic;
@@ -190,13 +190,15 @@ fn run<'a>(
 ) {
     let node = possible_jest_node.node;
     if let AstKind::CallExpression(call_expr) = node.kind() {
-        let name = get_node_name(&call_expr.callee);
+        let is_additional_test_block = !rule.additional_test_block_functions.is_empty()
+            && rule.additional_test_block_functions.contains(&get_node_name(&call_expr.callee));
+
         if is_type_of_jest_fn_call(
             call_expr,
             possible_jest_node,
             ctx,
             &[JestFnKind::General(JestGeneralFnKind::Test)],
-        ) || rule.additional_test_block_functions.contains(&name)
+        ) || is_additional_test_block
         {
             if let Some(member_expr) = call_expr.callee.as_member_expression() {
                 let Some(property_name) = member_expr.static_property_name() else {
@@ -221,7 +223,7 @@ fn run<'a>(
             // Visit each argument of the test call
             for argument in &call_expr.arguments {
                 if let Some(expr) = argument.as_expression() {
-                    visitor.check_expression(expr);
+                    visitor.visit_expression(expr);
                     if visitor.found_assertion {
                         return;
                     }
@@ -255,44 +257,6 @@ impl<'a, 'b> AssertionVisitor<'a, 'b> {
         }
     }
 
-    fn check_expression(&mut self, expr: &Expression<'a>) {
-        // Avoid infinite loops by tracking visited expressions
-        if !self.visited.insert(expr.span()) {
-            return;
-        }
-
-        match expr {
-            Expression::FunctionExpression(fn_expr) => {
-                if let Some(body) = &fn_expr.body {
-                    self.visit_function_body(body);
-                }
-            }
-            Expression::ArrowFunctionExpression(arrow_expr) => {
-                self.visit_function_body(&arrow_expr.body);
-            }
-            Expression::CallExpression(call_expr) => {
-                self.visit_call_expression(call_expr);
-            }
-            Expression::Identifier(ident) => {
-                self.check_identifier(ident);
-            }
-            Expression::AwaitExpression(expr) => {
-                self.check_expression(&expr.argument);
-            }
-            Expression::ArrayExpression(array_expr) => {
-                for element in &array_expr.elements {
-                    if let Some(element_expr) = element.as_expression() {
-                        self.check_expression(element_expr);
-                        if self.found_assertion {
-                            return;
-                        }
-                    }
-                }
-            }
-            _ => {}
-        }
-    }
-
     fn check_identifier(&mut self, ident: &oxc_ast::ast::IdentifierReference<'a>) {
         let Some(node) = get_declaration_of_variable(ident, self.ctx) else {
             return;
@@ -307,30 +271,37 @@ impl<'a, 'b> AssertionVisitor<'a, 'b> {
 }
 
 impl<'a> Visit<'a> for AssertionVisitor<'a, '_> {
-    fn visit_call_expression(&mut self, call_expr: &CallExpression<'a>) {
-        let name = get_node_name(&call_expr.callee);
-        if self.assert_function_matchers.iter().any(|matcher| matcher.is_match(&name)) {
-            self.found_assertion = true;
+    fn visit_expression(&mut self, expr: &Expression<'a>) {
+        if self.found_assertion || !self.visited.insert(expr.span()) {
             return;
         }
 
-        for argument in &call_expr.arguments {
-            if let Some(expr) = argument.as_expression() {
-                self.check_expression(expr);
-                if self.found_assertion {
+        match expr {
+            Expression::CallExpression(call_expr) => {
+                let name = get_node_name(&call_expr.callee);
+                if self.assert_function_matchers.iter().any(|matcher| matcher.is_match(&name)) {
+                    self.found_assertion = true;
                     return;
                 }
             }
+            Expression::Identifier(ident) => {
+                self.check_identifier(ident);
+                return;
+            }
+            Expression::FunctionExpression(fn_expr) => {
+                if let Some(body) = &fn_expr.body {
+                    self.visit_function_body(body);
+                }
+                return;
+            }
+            Expression::ArrowFunctionExpression(arrow_expr) => {
+                self.visit_function_body(&arrow_expr.body);
+                return;
+            }
+            _ => {}
         }
 
-        walk::walk_call_expression(self, call_expr);
-    }
-
-    fn visit_expression_statement(&mut self, stmt: &oxc_ast::ast::ExpressionStatement<'a>) {
-        self.check_expression(&stmt.expression);
-        if !self.found_assertion {
-            walk::walk_expression_statement(self, stmt);
-        }
+        walk::walk_expression(self, expr);
     }
 
     fn visit_block_statement(&mut self, block: &oxc_ast::ast::BlockStatement<'a>) {
